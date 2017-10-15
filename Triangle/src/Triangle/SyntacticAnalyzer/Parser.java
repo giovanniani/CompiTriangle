@@ -322,17 +322,36 @@ public class Parser {
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
       break;
-
-    case Token.WHILE:
+    /*---------------modificado para el while y el for ------------*/
+    case Token.REPEAT:
       {
+        System.out.println("si entro la concha de la lora");
         acceptIt();
-        Expression eAST = parseExpression();
-        accept(Token.DO);
-        Command cAST = parseSingleCommand();
-        finish(commandPos);
-        commandAST = new WhileCommand(eAST, cAST, commandPos);
+        switch(currentToken.kind)
+        {
+            case Token.WHILE:
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseSingleCommand();
+                commandAST = new WhileCommand(eAST, cAST, commandPos);
+                System.out.println(currentToken.kind);
+                accept(Token.END);
+                finish(commandPos);
+                break;
+            case Token.DO:
+                acceptIt();
+                Command cAST2 = parseSingleCommand();
+                accept(Token.WHILE);
+                Expression eAST2 = parseExpression();
+                commandAST = new WhileCommand(eAST2, cAST2, commandPos);
+                System.out.println(currentToken.kind);
+                accept(Token.END);
+                finish(commandPos);
+        }
       }
       break;
+      
 
     case Token.SEMICOLON:
     case Token.END:

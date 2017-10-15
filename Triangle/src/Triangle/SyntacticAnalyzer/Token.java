@@ -32,7 +32,7 @@ final class Token extends Object {
         if (comparison == 0) {
           this.kind = currentKind;
           searching = false;
-        } else if (comparison > 0 || currentKind == lastReservedWord) {
+        } else if (currentKind == lastReservedWord) {
           this.kind = Token.IDENTIFIER;
           searching = false;
         } else {
@@ -88,7 +88,7 @@ final class Token extends Object {
     // punctuation...
     DOT			= 21,
     COLON		= 22,
-    SEMICOLON	= 23,
+    SEMICOLON           = 23,
     COMMA		= 24,
     BECOMES		= 25,
     IS			= 26,
@@ -103,7 +103,12 @@ final class Token extends Object {
 
     // special tokens...
     EOT			= 33,
-    ERROR		= 34;
+    ERROR		= 34,
+          
+    //new words...
+    REPEAT              = 35,
+    FOR                 = 36,
+    UNTIL               = 37;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -140,10 +145,15 @@ final class Token extends Object {
     "{",
     "}",
     "",
-    "<error>"
+    "<error>",
+    
+    //nuevas palabras del lenguajes
+    "repeat",
+    "for",
+    "until"
   };
 
   private final static int	firstReservedWord = Token.ARRAY,
-  				lastReservedWord  = Token.WHILE;
+  				lastReservedWord  = Token.REPEAT;// modificado para evitar problemas con el while
 
 }
