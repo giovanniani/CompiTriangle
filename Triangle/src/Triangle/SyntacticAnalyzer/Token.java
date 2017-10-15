@@ -88,7 +88,7 @@ final class Token extends Object {
     // punctuation...
     DOT			= 21,
     COLON		= 22,
-    SEMICOLON	= 23,
+    SEMICOLON           = 23,
     COMMA		= 24,
     BECOMES		= 25,
     IS			= 26,
@@ -106,7 +106,9 @@ final class Token extends Object {
     ERROR		= 34,
           
     //new words...
-    REPEAT              = 35;
+    REPEAT              = 35,
+    FOR                 = 36,
+    UNTIL               = 37;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -144,7 +146,9 @@ final class Token extends Object {
     "}",
     "",
     "<error>",
-    "repeat"
+    "repeat",
+    "for",
+    "until"
   };
 
   private final static int	firstReservedWord = Token.ARRAY,

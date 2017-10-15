@@ -327,14 +327,28 @@ public class Parser {
       {
         System.out.println("si entro la concha de la lora");
         acceptIt();
-        accept(Token.WHILE);
-        Expression eAST = parseExpression();
-        accept(Token.DO);
-        Command cAST = parseSingleCommand();
-        finish(commandPos);
-        accept(Token.END);
-        commandAST = new WhileCommand(eAST, cAST, commandPos);
-        
+        switch(currentToken.kind)
+        {
+            case Token.WHILE:
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseSingleCommand();
+                commandAST = new WhileCommand(eAST, cAST, commandPos);
+                System.out.println(currentToken.kind);
+                accept(Token.END);
+                finish(commandPos);
+                break;
+            case Token.DO:
+                acceptIt();
+                Command cAST2 = parseSingleCommand();
+                accept(Token.WHILE);
+                Expression eAST2 = parseExpression();
+                commandAST = new WhileCommand(eAST2, cAST2, commandPos);
+                System.out.println(currentToken.kind);
+                accept(Token.END);
+                finish(commandPos);
+        }
       }
       break;
       
