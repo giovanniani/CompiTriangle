@@ -84,31 +84,32 @@ final class Token extends Object {
     TYPE		= 18,
     VAR			= 19,
     WHILE		= 20,
+    REPEAT              = 21,
+    FOR                 = 22,
+    UNTIL               = 23,
+          
 
     // punctuation...
-    DOT			= 21,
-    COLON		= 22,
-    SEMICOLON           = 23,
-    COMMA		= 24,
-    BECOMES		= 25,
-    IS			= 26,
+    DOT			= 24,
+    COLON		= 25,
+    SEMICOLON           = 26,
+    COMMA		= 27,
+    BECOMES		= 28,
+    IS			= 29,
 
     // brackets...
-    LPAREN		= 27,
-    RPAREN		= 28,
-    LBRACKET	= 29,
-    RBRACKET	= 30,
-    LCURLY		= 31,
-    RCURLY		= 32,
+    LPAREN		= 30,
+    RPAREN		= 31,
+    LBRACKET            = 32,
+    RBRACKET            = 33,
+    LCURLY		= 34,
+    RCURLY		= 35,
 
     // special tokens...
-    EOT			= 33,
-    ERROR		= 34,
+    EOT			= 36,
+    ERROR		= 37;
           
-    //new words...
-    REPEAT              = 35,
-    FOR                 = 36,
-    UNTIL               = 37;
+    
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -132,6 +133,10 @@ final class Token extends Object {
     "type",
     "var",
     "while",
+    //nuevas palabras del lenguajes
+    "repeat",
+    "for",
+    "until",
     ".",
     ":",
     ";",
@@ -145,15 +150,12 @@ final class Token extends Object {
     "{",
     "}",
     "",
-    "<error>",
+    "<error>"
     
-    //nuevas palabras del lenguajes
-    "repeat",
-    "for",
-    "until"
+    
   };
 
   private final static int	firstReservedWord = Token.ARRAY,
-  				lastReservedWord  = Token.REPEAT;// modificado para evitar problemas con el while
+  				lastReservedWord  = Token.UNTIL;// modificado para evitar problemas con el while
 
 }
