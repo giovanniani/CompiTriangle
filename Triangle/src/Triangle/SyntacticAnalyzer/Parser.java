@@ -322,17 +322,22 @@ public class Parser {
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
       break;
-
-    case Token.WHILE:
+    
+    case Token.REPEAT:
       {
+        System.out.println("si entro la concha de la lora");
         acceptIt();
+        accept(Token.WHILE);
         Expression eAST = parseExpression();
         accept(Token.DO);
         Command cAST = parseSingleCommand();
         finish(commandPos);
+        accept(Token.END);
         commandAST = new WhileCommand(eAST, cAST, commandPos);
+        
       }
       break;
+      
 
     case Token.SEMICOLON:
     case Token.END:

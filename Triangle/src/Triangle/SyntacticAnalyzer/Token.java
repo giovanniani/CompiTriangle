@@ -32,7 +32,7 @@ final class Token extends Object {
         if (comparison == 0) {
           this.kind = currentKind;
           searching = false;
-        } else if (comparison > 0 || currentKind == lastReservedWord) {
+        } else if (currentKind == lastReservedWord) {
           this.kind = Token.IDENTIFIER;
           searching = false;
         } else {
@@ -103,7 +103,10 @@ final class Token extends Object {
 
     // special tokens...
     EOT			= 33,
-    ERROR		= 34;
+    ERROR		= 34,
+          
+    //new words...
+    REPEAT              = 35;
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -140,10 +143,11 @@ final class Token extends Object {
     "{",
     "}",
     "",
-    "<error>"
+    "<error>",
+    "repeat"
   };
 
   private final static int	firstReservedWord = Token.ARRAY,
-  				lastReservedWord  = Token.WHILE;
+  				lastReservedWord  = Token.REPEAT;
 
 }
