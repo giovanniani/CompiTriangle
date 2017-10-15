@@ -322,7 +322,7 @@ public class Parser {
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
       break;
-    
+    /*---------------modificado para el while y el for ------------*/
     case Token.REPEAT:
       {
         System.out.println("si entro la concha de la lora");

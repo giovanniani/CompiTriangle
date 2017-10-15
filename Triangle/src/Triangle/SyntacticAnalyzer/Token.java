@@ -146,12 +146,14 @@ final class Token extends Object {
     "}",
     "",
     "<error>",
+    
+    //nuevas palabras del lenguajes
     "repeat",
     "for",
     "until"
   };
 
   private final static int	firstReservedWord = Token.ARRAY,
-  				lastReservedWord  = Token.REPEAT;
+  				lastReservedWord  = Token.REPEAT;// modificado para evitar problemas con el while
 
 }
