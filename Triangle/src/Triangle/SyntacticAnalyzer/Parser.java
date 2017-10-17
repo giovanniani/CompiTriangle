@@ -81,6 +81,7 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
+import java.util.ArrayList;
 
 public class Parser {
 
@@ -325,6 +326,8 @@ public class Parser {
 
     case Token.REPEAT:
     {
+        ArrayList<Command> tempCommands = new ArrayList<>();
+        Command cAST2;
         System.out.println("si entro al repeat");
         acceptIt();
         switch(currentToken.kind)
@@ -335,19 +338,29 @@ public class Parser {
                 accept(Token.DO);
                 Command cAST = parseSingleCommand();
                 commandAST = new WhileCommand(eAST, cAST, commandPos);
-                System.out.println(currentToken.kind);
                 accept(Token.END);
                 finish(commandPos);
                 break;
             case Token.DO:
                 acceptIt();
-                Command cAST2 = parseSingleCommand();
+                System.out.println(currentToken.toString());
+                /*while(Token.WHILE != currentToken.kind)
+                {  
+                    System.out.println(currentToken.toString() + "---");
+                    cAST2 = parseSingleCommand();
+                    tempCommands.add(cAST2);
+                    acceptIt();
+                }*/
+                cAST = parseCommand();
                 accept(Token.WHILE);
-                Expression eAST2 = parseExpression();
-                commandAST = new WhileCommand(eAST2, cAST2, commandPos);
-                System.out.println(currentToken.kind);
-                accept(Token.END);
+                Expression eAST2 = parseExpression();                
+                /*for(Command aux: tempCommands)
+                {
+                    commandAST = new WhileCommand(eAST2, commandAST, commandPos);
+                }*/
+                commandAST = new WhileCommand(eAST2, cAST, commandPos);
                 finish(commandPos);
+                accept(Token.END);
                 break;
         }
     }
