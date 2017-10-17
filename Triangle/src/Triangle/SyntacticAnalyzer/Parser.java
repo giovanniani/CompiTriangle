@@ -301,7 +301,9 @@ public class Parser {
 
     case Token.LET:
       {
+          
         acceptIt();
+        System.out.print(currentToken.spelling + "\n");
         Declaration dAST = parseDeclaration();
         accept(Token.IN);
         Command cAST = parseSingleCommand();
@@ -325,7 +327,7 @@ public class Parser {
     /*---------------modificado para el while y el for ------------*/
     case Token.REPEAT:
       {
-        System.out.println("si entro la concha de la lora");
+        System.out.println("si entró al repeat");
         acceptIt();
         switch(currentToken.kind)
         {
@@ -392,6 +394,7 @@ public class Parser {
       {
         acceptIt();
         Declaration dAST = parseDeclaration();
+        System.out.println(currentToken.kind);
         accept(Token.IN);
         Expression eAST = parseExpression();
         finish(expressionPos);
