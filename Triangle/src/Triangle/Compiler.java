@@ -11,7 +11,7 @@
  * not be used for commercial purposes without the prior written permission
  * of the authors.
  */
-/*----hello*/
+
 package Triangle;
 
 import Triangle.AbstractSyntaxTrees.Program;
@@ -77,7 +77,7 @@ public class Compiler {
         reporter = new ErrorReporter();
         parser   = new Parser(scanner, reporter);
         checker  = new Checker(reporter);
-        //encoder  = new Encoder(reporter);
+        encoder  = new Encoder(reporter);
         drawer   = new Drawer();
 
         // scanner.enableDebugging();
@@ -92,8 +92,8 @@ public class Compiler {
                 drawer.draw(theAST);
             }
             if (reporter.numErrors == 0) {
-                //System.out.println("Code Generation ...");
-                //encoder.encodeRun(theAST, showingTable);	// 3rd pass
+                System.out.println("Code Generation ...");
+                encoder.encodeRun(theAST, showingTable);	// 3rd pass
             }
         }
 

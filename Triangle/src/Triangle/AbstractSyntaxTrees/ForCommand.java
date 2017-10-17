@@ -18,7 +18,8 @@ public class ForCommand extends Command {
   }
 
   public Object visit(Visitor v, Object o) {
-    return v.visitForCommand(this, o);
+    //return v.visitForCommand(this, o);
+    return null;
   }
 
   public Identifier I;

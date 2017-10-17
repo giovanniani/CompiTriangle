@@ -32,7 +32,7 @@ final class Token extends Object {
         if (comparison == 0) {
           this.kind = currentKind;
           searching = false;
-        } else if (currentKind == lastReservedWord) {
+        } else if (comparison > 0 || currentKind == lastReservedWord) {
           this.kind = Token.IDENTIFIER;
           searching = false;
         } else {
@@ -73,26 +73,25 @@ final class Token extends Object {
     DO			= 7,
     ELSE		= 8,
     END			= 9,
-    FUNC		= 10,
-    IF			= 11,
-    IN			= 12,
-    LET			= 13,
-    OF			= 14,
-    PROC		= 15,
-    RECORD		= 16,
-    THEN		= 17,
-    TYPE		= 18,
-    VAR			= 19,
-    WHILE		= 20,
-    REPEAT              = 21,
-    FOR                 = 22,
-    UNTIL               = 23,
-          
+    FOR                 = 10,      
+    FUNC		= 11,
+    IF			= 12,
+    IN			= 13,
+    LET			= 14,
+    OF			= 15,
+    PROC		= 16,
+    RECORD		= 17,
+    REPEAT              = 18,      
+    THEN		= 19,
+    TYPE		= 20,
+    UNTIL               = 21,
+    VAR			= 22,
+    WHILE		= 23,
 
     // punctuation...
     DOT			= 24,
     COLON		= 25,
-    SEMICOLON           = 26,
+    SEMICOLON	= 26,
     COMMA		= 27,
     BECOMES		= 28,
     IS			= 29,
@@ -100,16 +99,14 @@ final class Token extends Object {
     // brackets...
     LPAREN		= 30,
     RPAREN		= 31,
-    LBRACKET            = 32,
-    RBRACKET            = 33,
+    LBRACKET	= 32,
+    RBRACKET	= 33,
     LCURLY		= 34,
     RCURLY		= 35,
 
     // special tokens...
     EOT			= 36,
     ERROR		= 37;
-          
-    
 
   private static String[] tokenTable = new String[] {
     "<int>",
@@ -122,6 +119,7 @@ final class Token extends Object {
     "do",
     "else",
     "end",
+    "for",
     "func",
     "if",
     "in",
@@ -129,14 +127,12 @@ final class Token extends Object {
     "of",
     "proc",
     "record",
+    "repeat",
     "then",
     "type",
+    "until",
     "var",
     "while",
-    //nuevas palabras del lenguajes
-    "repeat",
-    "for",
-    "until",
     ".",
     ":",
     ";",
@@ -151,11 +147,9 @@ final class Token extends Object {
     "}",
     "",
     "<error>"
-    
-    
   };
 
   private final static int	firstReservedWord = Token.ARRAY,
-  				lastReservedWord  = Token.UNTIL;// modificado para evitar problemas con el while
+  				lastReservedWord  = Token.WHILE;
 
 }

@@ -322,10 +322,10 @@ public class Parser {
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
       break;
-    /*---------------modificado para el while y el for ------------*/
+
     case Token.REPEAT:
-      {
-        System.out.println("si entro la concha de la lora");
+    {
+        System.out.println("si entro al repeat");
         acceptIt();
         switch(currentToken.kind)
         {
@@ -348,10 +348,11 @@ public class Parser {
                 System.out.println(currentToken.kind);
                 accept(Token.END);
                 finish(commandPos);
+                break;
         }
-      }
-      break;
-      
+    }
+    break;
+     
 
     case Token.SEMICOLON:
     case Token.END:
@@ -764,6 +765,7 @@ public class Parser {
     case Token.VAR:
       {
         acceptIt();
+        
         Identifier iAST = parseIdentifier();
         accept(Token.COLON);
         TypeDenoter tAST = parseTypeDenoter();

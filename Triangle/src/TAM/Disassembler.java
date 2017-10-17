@@ -34,7 +34,7 @@ import java.io.IOException;
  * </p>
  *
  */
-/*------hello everybody ------*/
+
 public class Disassembler {
 
   static String objectName;
