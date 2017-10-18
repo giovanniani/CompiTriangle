@@ -320,7 +320,7 @@ public class Parser {
         Command c1AST = parseSingleCommand();
         accept(Token.ELSE);
         Command c2AST = parseSingleCommand();
-         accept(Token.END);
+        accept(Token.END);
         finish(commandPos);
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
@@ -355,11 +355,10 @@ public class Parser {
         Command cAST;
         Expression eAST;
         acceptIt();
-        System.out.println("token:"+currentToken.kind);
+
         switch(currentToken.kind) {
 
             // REPEAT DO.
-            
             case Token.DO:
 
                 acceptIt();
@@ -374,7 +373,7 @@ public class Parser {
                         eAST = parseExpression();
                         commandAST = new UntilCommand(eAST, cAST, commandPos);
                         finish(commandPos);
-                        accept(Token.END);                        
+                        accept(Token.END);
                         break;
                     
                     case Token.WHILE:
@@ -390,6 +389,7 @@ public class Parser {
                         syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
                         break;
                 }
+
                 break;
 
             // REPEAT UNTIL EXPRESSION DO COMMAND END.
@@ -481,7 +481,6 @@ public class Parser {
         accept(Token.ELSE);
         Expression e3AST = parseExpression();
         finish(expressionPos);
-
         expressionAST = new IfExpression(e1AST, e2AST, e3AST, expressionPos);
       }
       break;

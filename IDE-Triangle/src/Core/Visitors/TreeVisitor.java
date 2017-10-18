@@ -121,7 +121,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitUntilCommand(UntilCommand ast, Object obj) {
-        return(createBinary("While Command", ast.E, ast.C));
+        return(createBinary("Until Command", ast.E, ast.C));
     }
 
     public Object visitWhileCommand(WhileCommand ast, Object obj) {

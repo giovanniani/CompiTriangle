@@ -126,7 +126,7 @@ public class LayoutVisitor implements Visitor {
    * @return 
    */
   public Object visitUntilCommand(UntilCommand ast, Object obj) {
-    return layoutBinary("WhileCom.", ast.E, ast.C);
+    return layoutBinary("UntilCom.", ast.E, ast.C);
   }
 
   public Object visitWhileCommand(WhileCommand ast, Object obj) {
