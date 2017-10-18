@@ -3,7 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Giova/Documents/NetBeansProjects/Triangle/src/Triangle/AbstractSyntaxTrees/BinaryExpression.java</file>
+            <file>file:/C:/Users/Giova/Documents/GitHub/CompiTriangle/Triangle/src/Triangle/AbstractSyntaxTrees/ForCommand.java</file>
+            <file>file:/C:/Users/Giova/Documents/GitHub/CompiTriangle/Triangle/src/Triangle/SyntacticAnalyzer/Parser.java</file>
+            <file>file:/C:/Users/Giova/Documents/GitHub/CompiTriangle/Triangle/src/Triangle/SyntacticAnalyzer/Scanner.java</file>
+            <file>file:/C:/Users/Giova/Documents/GitHub/CompiTriangle/Triangle/src/Triangle/SyntacticAnalyzer/Token.java</file>
         </group>
     </open-files>
 </project-private>
