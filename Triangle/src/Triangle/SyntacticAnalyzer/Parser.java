@@ -350,6 +350,14 @@ public class Parser {
     /**
      * All Repeat loop.
      */
+    
+    case Token.FOR:
+    {
+        acceptIt();
+        
+    }
+    
+    
     case Token.REPEAT:
     {
 
@@ -695,6 +703,7 @@ public class Parser {
   }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
+    Command commandAST = null; // in case there's a syntactic error
     Declaration declarationAST = null; // in case there's a syntactic error
 
     SourcePosition declarationPos = new SourcePosition();
@@ -721,6 +730,18 @@ public class Parser {
         TypeDenoter tAST = parseTypeDenoter();
         finish(declarationPos);
         declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+        Vname vAST = parseRestOfVname(iAST);
+        if(currentToken.kind == Token.BECOMES)
+        {
+
+            accept(Token.BECOMES);
+            Expression eAST = parseExpression();
+            finish(declarationPos);
+            commandAST = new AssignCommand(vAST, eAST, declarationPos);
+        }
+        accept(Token.SEMICOLON);
+
+        
       }
       break;
 
