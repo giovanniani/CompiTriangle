@@ -320,6 +320,7 @@ public class Parser {
         Command c1AST = parseSingleCommand();
         accept(Token.ELSE);
         Command c2AST = parseSingleCommand();
+         accept(Token.END);
         finish(commandPos);
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
@@ -342,6 +343,7 @@ public class Parser {
      */
     case Token.SKIP:
         acceptIt();
+        commandAST= new EmptyCommand(commandPos);
     break;
 
     /**
@@ -353,33 +355,41 @@ public class Parser {
         Command cAST;
         Expression eAST;
         acceptIt();
-
+        System.out.println("token:"+currentToken.kind);
         switch(currentToken.kind) {
 
             // REPEAT DO.
+            
             case Token.DO:
 
                 acceptIt();
                 cAST = parseCommand();
-
-                if (currentToken.kind == Token.UNTIL) {
-                    // REPEAT DO COMMAND UNTIL EXPRESSION END.
-                    acceptIt();
-                    eAST = parseExpression();
-                    commandAST = new UntilCommand(eAST, cAST, commandPos);
-                    finish(commandPos);
-                    accept(Token.END);
-                } else if (currentToken.kind == Token.WHILE) {
-                    // REPEAT DO COMMAND WHILE EXPRESSION END.
-                    acceptIt();
-                    eAST = parseExpression();
-                    commandAST = new WhileCommand(eAST, cAST, commandPos);
-                    finish(commandPos);
-                    accept(Token.END);
-                } else {
-                    syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
+                
+                System.out.println("token:"+currentToken.kind);
+                switch(currentToken.kind)
+                {
+                    case Token.UNTIL:
+                        // REPEAT DO COMMAND UNTIL EXPRESSION END.
+                        acceptIt();
+                        eAST = parseExpression();
+                        commandAST = new UntilCommand(eAST, cAST, commandPos);
+                        finish(commandPos);
+                        accept(Token.END);                        
+                        break;
+                    
+                    case Token.WHILE:
+                        // REPEAT DO COMMAND WHILE EXPRESSION END.
+                        acceptIt();
+                        eAST = parseExpression();
+                        commandAST = new WhileCommand(eAST, cAST, commandPos);
+                        finish(commandPos);
+                        accept(Token.END);                        
+                        break;
+                        
+                    default:
+                        syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
+                        break;
                 }
-
                 break;
 
             // REPEAT UNTIL EXPRESSION DO COMMAND END.
@@ -471,6 +481,7 @@ public class Parser {
         accept(Token.ELSE);
         Expression e3AST = parseExpression();
         finish(expressionPos);
+
         expressionAST = new IfExpression(e1AST, e2AST, e3AST, expressionPos);
       }
       break;

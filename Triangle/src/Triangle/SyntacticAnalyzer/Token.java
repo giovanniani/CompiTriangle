@@ -114,7 +114,7 @@ final class Token extends Object {
     PAR			= 18,           // EDWTORBA: Add PAR token.
     PROC		= 19,
     RECORD		= 20,
-    RECURSIVE   = 21,           // EDWTORBA: Add RECURSIVE token.
+    RECURSIVE           = 21,           // EDWTORBA: Add RECURSIVE token.
     REPEAT		= 22,           // EDWTORBA: Add REPEAT token.
     SKIP		= 23,           // EDWTORBA: Add SKIP token.
     THEN		= 24,
