@@ -12,191 +12,250 @@
  * of the authors.
  */
 
+
+/**
+ * Imports.
+ */
 package Triangle.SyntacticAnalyzer;
 
 
+/**
+ * Define Scanner class.
+ */
 public final class Scanner {
 
+
+  /**
+   * Define the attributes.
+   */
   private SourceFile sourceFile;
   private boolean debug;
-
   private char currentChar;
   private StringBuffer currentSpelling;
   private boolean currentlyScanningToken;
 
-  private boolean isLetter(char c) {
-    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
-  }
 
-  private boolean isDigit(char c) {
-    return (c >= '0' && c <= '9');
-  }
-
-// isOperator returns true iff the given character is an operator character.
-
-  private boolean isOperator(char c) {
-    return (c == '+' || c == '-' || c == '*' || c == '/' ||
-	    c == '=' || c == '<' || c == '>' || c == '\\' ||
-	    c == '&' || c == '@' || c == '%' || c == '^' ||
-	    c == '?');
-  }
-
-
-///////////////////////////////////////////////////////////////////////////////
-
+  /**
+   * Define the Constructor.
+   * @param source 
+   */
   public Scanner(SourceFile source) {
     sourceFile = source;
     currentChar = sourceFile.getSource();
     debug = false;
   }
 
+  /**
+   * Define function isLetter.
+   *
+   * @param input
+   * @return TRUE if the input is a char, FALSE otherwise.
+   */
+  private boolean isLetter(char input) {
+    return (input >= 'a' && input <= 'z') || (input >= 'A' && input <= 'Z');
+  }
+
+  /**
+   * Define function isDigit.
+   *
+   * @param input
+   * @return TRUE if the input is a digit, FALSE otherwise.
+   */
+  private boolean isDigit(char input) {
+    return (input >= '0' && input <= '9');
+  }
+
+  /**
+   * Define function isOperator.
+   *
+   * @param input
+   * @return TRUE if the input is a operator character, FALSE otherwise.
+   */
+  private boolean isOperator(char input) {
+    return (
+      input == '+' || input == '-' || input == '*' || input == '/' ||
+      input == '=' || input == '<' || input == '>' || input == '\\' ||
+      input == '&' || input == '@' || input == '%' || input == '^' ||
+      input == '?'
+    );
+  }
+
+  /**
+   * Define function enableDebugging.
+   */
   public void enableDebugging() {
     debug = true;
   }
 
-  // takeIt appends the current character to the current token, and gets
-  // the next character from the source program.
-
+  /**
+   * TakeIt appends the current character to the current token, and gets
+   * the next character from the source program.
+   */
   private void takeIt() {
-    if (currentlyScanningToken)
+    if (currentlyScanningToken) {
       currentSpelling.append(currentChar);
+    }
+
     currentChar = sourceFile.getSource();
   }
 
-  // scanSeparator skips a single separator.
-
+  /**
+   * Define function scanSeparator.
+   * Skips a single separator.
+   */
   private void scanSeparator() {
+
     switch (currentChar) {
-    case '!':
+      case '!':
       {
         takeIt();
-        while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT))
+        while ((currentChar != SourceFile.EOL) && (currentChar != SourceFile.EOT)) {
           takeIt();
-        if (currentChar == SourceFile.EOL)
+        }
+        if (currentChar == SourceFile.EOL) {
           takeIt();
+        }
       }
       break;
 
-    case ' ': case '\n': case '\r': case '\t':
-      takeIt();
-      break;
+      case ' ': case '\n': case '\r': case '\t':
+        takeIt();
+        break;
     }
+
   }
 
+  /**
+   * Define function scanToken.
+   * @return Lexeme.
+   */
   private int scanToken() {
 
     switch (currentChar) {
 
-    case 'a':  case 'b':  case 'c':  case 'd':  case 'e':
-    case 'f':  case 'g':  case 'h':  case 'i':  case 'j':
-    case 'k':  case 'l':  case 'm':  case 'n':  case 'o':
-    case 'p':  case 'q':  case 'r':  case 's':  case 't':
-    case 'u':  case 'v':  case 'w':  case 'x':  case 'y':
-    case 'z':
-    case 'A':  case 'B':  case 'C':  case 'D':  case 'E':
-    case 'F':  case 'G':  case 'H':  case 'I':  case 'J':
-    case 'K':  case 'L':  case 'M':  case 'N':  case 'O':
-    case 'P':  case 'Q':  case 'R':  case 'S':  case 'T':
-    case 'U':  case 'V':  case 'W':  case 'X':  case 'Y':
-    case 'Z':
-      takeIt();
-      while (isLetter(currentChar) || isDigit(currentChar))
+      case 'a':  case 'b':  case 'c':  case 'd':  case 'e':
+      case 'f':  case 'g':  case 'h':  case 'i':  case 'j':
+      case 'k':  case 'l':  case 'm':  case 'n':  case 'o':
+      case 'p':  case 'q':  case 'r':  case 's':  case 't':
+      case 'u':  case 'v':  case 'w':  case 'x':  case 'y':
+      case 'z':
+      case 'A':  case 'B':  case 'C':  case 'D':  case 'E':
+      case 'F':  case 'G':  case 'H':  case 'I':  case 'J':
+      case 'K':  case 'L':  case 'M':  case 'N':  case 'O':
+      case 'P':  case 'Q':  case 'R':  case 'S':  case 'T':
+      case 'U':  case 'V':  case 'W':  case 'X':  case 'Y':
+      case 'Z':
         takeIt();
-      return Token.IDENTIFIER;
+        while (isLetter(currentChar) || isDigit(currentChar)) {
+          takeIt();
+        }
+        return Token.IDENTIFIER;
 
-    case '0':  case '1':  case '2':  case '3':  case '4':
-    case '5':  case '6':  case '7':  case '8':  case '9':
-      takeIt();
-      while (isDigit(currentChar))
+      case '0':  case '1':  case '2':  case '3':  case '4':
+      case '5':  case '6':  case '7':  case '8':  case '9':
         takeIt();
-      return Token.INTLITERAL;
+        while (isDigit(currentChar)) {
+          takeIt();
+        }
+        return Token.INTLITERAL;
 
-    case '+':  case '-':  case '*': case '/':  case '=':
-    case '<':  case '>':  case '\\':  case '&':  case '@':
-    case '%':  case '^':  case '?':
-      takeIt();
-      while (isOperator(currentChar))
+      case '+':  case '-':  case '*': case '/':  case '=':
+      case '<':  case '>':  case '\\':  case '&':  case '@':
+      case '%':  case '^':  case '?':
         takeIt();
-      return Token.OPERATOR;
+        while (isOperator(currentChar)) {
+          takeIt();
+        }
+        return Token.OPERATOR;
 
-    case '\'':
-      takeIt();
-      takeIt(); // the quoted character
-      if (currentChar == '\'') {
-      	takeIt();
-        return Token.CHARLITERAL;
-      } else
+      case '\'':
+        takeIt();
+        takeIt(); // the quoted character
+        if (currentChar == '\'') {
+          takeIt();
+          return Token.CHARLITERAL;
+        } else {
+          return Token.ERROR;
+        }
+
+      case '.':
+        takeIt();
+        return Token.DOT;
+
+      case ':':
+        takeIt();
+        if (currentChar == '=') {
+          takeIt();
+          return Token.BECOMES;
+        } else {
+          return Token.COLON;
+        }
+
+      case ';':
+        takeIt();
+        return Token.SEMICOLON;
+
+      case ',':
+        takeIt();
+        return Token.COMMA;
+
+      case '~':
+        takeIt();
+        return Token.IS;
+
+      case '(':
+        takeIt();
+        return Token.LPAREN;
+
+      case ')':
+        takeIt();
+        return Token.RPAREN;
+
+      case '[':
+        takeIt();
+        return Token.LBRACKET;
+
+      case ']':
+        takeIt();
+        return Token.RBRACKET;
+
+      case '{':
+        takeIt();
+        return Token.LCURLY;
+
+      case '}':
+        takeIt();
+        return Token.RCURLY;
+
+      case SourceFile.EOT:
+        return Token.EOT;
+
+      default:
+        takeIt();
         return Token.ERROR;
-
-    case '.':
-      takeIt();
-      return Token.DOT;
-
-    case ':':
-      takeIt();
-      if (currentChar == '=') {
-        takeIt();
-        return Token.BECOMES;
-      } else
-        return Token.COLON;
-
-    case ';':
-      takeIt();
-      return Token.SEMICOLON;
-
-    case ',':
-      takeIt();
-      return Token.COMMA;
-
-    case '~':
-      takeIt();
-      return Token.IS;
-
-    case '(':
-      takeIt();
-      return Token.LPAREN;
-
-    case ')':
-      takeIt();
-      return Token.RPAREN;
-
-    case '[':
-      takeIt();
-      return Token.LBRACKET;
-
-    case ']':
-      takeIt();
-      return Token.RBRACKET;
-
-    case '{':
-      takeIt();
-      return Token.LCURLY;
-
-    case '}':
-      takeIt();
-      return Token.RCURLY;
-
-    case SourceFile.EOT:
-      return Token.EOT;
-
-    default:
-      takeIt();
-      return Token.ERROR;
     }
+
   }
 
-  public Token scan () {
+  /**
+   * Define function scan.
+   * @return Token.
+   */
+  public Token scan() {
     Token tok;
     SourcePosition pos;
     int kind;
 
     currentlyScanningToken = false;
-    while (currentChar == '!'
-           || currentChar == ' '
-           || currentChar == '\n'
-           || currentChar == '\r'
-           || currentChar == '\t')
+    while (
+        currentChar == '!' ||
+        currentChar == ' ' ||
+        currentChar == '\n' ||
+        currentChar == '\r' ||
+        currentChar == '\t'
+    ) {
       scanSeparator();
+    }
 
     currentlyScanningToken = true;
     currentSpelling = new StringBuffer("");
@@ -207,8 +266,10 @@ public final class Scanner {
 
     pos.finish = sourceFile.getCurrentLine();
     tok = new Token(kind, currentSpelling.toString(), pos);
-    if (debug)
+    if (debug) {
       System.out.println(tok);
+    }
+
     return tok;
   }
 

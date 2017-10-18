@@ -1,0 +1,22 @@
+let
+	var n1: Integer;
+	var n2: Integer;
+	var num: Integer
+in
+
+begin
+
+	num := 1;
+
+	repeat while (num < 5) do
+
+		num := num +1;
+
+		if (num = 2) then
+			put('O')
+		else
+			put('M')
+
+	end
+
+end

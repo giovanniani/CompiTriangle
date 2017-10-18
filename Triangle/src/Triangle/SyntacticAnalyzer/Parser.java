@@ -80,8 +80,8 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.UntilCommand;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
-import java.util.ArrayList;
 
 public class Parser {
 
@@ -294,6 +294,7 @@ public class Parser {
       }
       break;
 
+    // EDWTORBA: Delete commands.
     case Token.BEGIN:
       acceptIt();
       commandAST = parseCommand();
@@ -323,49 +324,97 @@ public class Parser {
         commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
       }
       break;
+/*
+    case Token.WHILE:
+      {
+        acceptIt();
+        Expression eAST = parseExpression();
+        accept(Token.DO);
+        Command cAST = parseSingleCommand();
+        finish(commandPos);
+        commandAST = new WhileCommand(eAST, cAST, commandPos);
+      }
+      break;
+*/
 
+    /**
+     * GEOVANNI: Add new commands.
+     */
+    case Token.SKIP:
+        acceptIt();
+    break;
+
+    /**
+     * All Repeat loop.
+     */
     case Token.REPEAT:
     {
-        ArrayList<Command> tempCommands = new ArrayList<>();
-        Command cAST2;
-        System.out.println("si entro al repeat");
+
+        Command cAST;
+        Expression eAST;
         acceptIt();
-        switch(currentToken.kind)
-        {
-            case Token.WHILE:
+
+        switch(currentToken.kind) {
+
+            // REPEAT DO.
+            case Token.DO:
+
                 acceptIt();
-                Expression eAST = parseExpression();
+                cAST = parseCommand();
+
+                if (currentToken.kind == Token.UNTIL) {
+                    // REPEAT DO COMMAND UNTIL EXPRESSION END.
+                    acceptIt();
+                    eAST = parseExpression();
+                    commandAST = new UntilCommand(eAST, cAST, commandPos);
+                    finish(commandPos);
+                    accept(Token.END);
+                } else if (currentToken.kind == Token.WHILE) {
+                    // REPEAT DO COMMAND WHILE EXPRESSION END.
+                    acceptIt();
+                    eAST = parseExpression();
+                    commandAST = new WhileCommand(eAST, cAST, commandPos);
+                    finish(commandPos);
+                    accept(Token.END);
+                } else {
+                    syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
+                }
+
+                break;
+
+            // REPEAT UNTIL EXPRESSION DO COMMAND END.
+            case Token.UNTIL:
+
+                acceptIt();
+                eAST = parseExpression();
                 accept(Token.DO);
-                Command cAST = parseSingleCommand();
+                cAST = parseCommand();
+                commandAST = new UntilCommand(eAST, cAST, commandPos);
+                accept(Token.END);
+                finish(commandPos);
+
+                break;
+
+            // REPEAT WHILE EXPRESSION DO COMMAND END.
+            case Token.WHILE:
+
+                acceptIt();
+                eAST = parseExpression();
+                accept(Token.DO);
+                cAST = parseCommand();
                 commandAST = new WhileCommand(eAST, cAST, commandPos);
                 accept(Token.END);
                 finish(commandPos);
+
                 break;
-            case Token.DO:
-                acceptIt();
-                System.out.println(currentToken.toString());
-                /*while(Token.WHILE != currentToken.kind)
-                {  
-                    System.out.println(currentToken.toString() + "---");
-                    cAST2 = parseSingleCommand();
-                    tempCommands.add(cAST2);
-                    acceptIt();
-                }*/
-                cAST = parseCommand();
-                accept(Token.WHILE);
-                Expression eAST2 = parseExpression();                
-                /*for(Command aux: tempCommands)
-                {
-                    commandAST = new WhileCommand(eAST2, commandAST, commandPos);
-                }*/
-                commandAST = new WhileCommand(eAST2, cAST, commandPos);
-                finish(commandPos);
-                accept(Token.END);
+
+            default:
+                syntacticError("\"%\" Unexpected token. 'Do' or 'While' was expected.", currentToken.spelling);
                 break;
         }
+
     }
     break;
-     
 
     case Token.SEMICOLON:
     case Token.END:
@@ -778,7 +827,6 @@ public class Parser {
     case Token.VAR:
       {
         acceptIt();
-        
         Identifier iAST = parseIdentifier();
         accept(Token.COLON);
         TypeDenoter tAST = parseTypeDenoter();

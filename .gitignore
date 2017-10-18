@@ -1,0 +1,7 @@
+
+/Example-Codes/**/*.ini
+/IDE-Triangle/**/*.ini
+/Triangle/**/*.ini
+
+/Example-Codes/build
+/IDE-Triangle/build

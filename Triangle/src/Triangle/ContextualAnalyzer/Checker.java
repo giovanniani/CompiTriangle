@@ -84,6 +84,7 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.UntilCommand;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
@@ -143,6 +144,24 @@ public final class Checker implements Visitor {
   public Object visitSequentialCommand(SequentialCommand ast, Object o) {
     ast.C1.visit(this, null);
     ast.C2.visit(this, null);
+    return null;
+  }
+
+  /**
+   * EDWTORBA: Add visitUntilCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitUntilCommand(UntilCommand ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+
+    if (! eType.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    }
+
+    ast.C.visit(this, null);
     return null;
   }
 

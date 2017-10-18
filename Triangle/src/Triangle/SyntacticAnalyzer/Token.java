@@ -12,15 +12,34 @@
  * of the authors.
  */
 
+
+/**
+ * Imports.
+ */
 package Triangle.SyntacticAnalyzer;
 
 
+/**
+ * Define Token class.
+ */
 final class Token extends Object {
 
+
+  /**
+   * Define the attributes.
+   */
   protected int kind;
   protected String spelling;
   protected SourcePosition position;
 
+
+  /**
+   * Define the constructor.
+   * 
+   * @param kind
+   * @param spelling
+   * @param position 
+   */
   public Token(int kind, String spelling, SourcePosition position) {
 
     if (kind == Token.IDENTIFIER) {
@@ -39,100 +58,124 @@ final class Token extends Object {
           currentKind ++;
         }
       }
-    } else
+    } else {
       this.kind = kind;
+    }
 
     this.spelling = spelling;
     this.position = position;
-
   }
 
+  /**
+   * Define function spell.
+   * 
+   * @param kind
+   * @return 
+   */
   public static String spell (int kind) {
     return tokenTable[kind];
   }
 
+  /**
+   * Define function toString.
+   * @return 
+   */
   public String toString() {
-    return "Kind=" + kind + ", spelling=" + spelling +
-      ", position=" + position;
+    return "Kind=" + kind + ", spelling=" + spelling + ", position=" + position;
   }
 
-  // Token classes...
-
+  /**
+   * Token classes...
+   * Literals, identifiers, operators...
+   */
   public static final int
 
-    // literals, identifiers, operators...
+    // Literals.
     INTLITERAL	= 0,
     CHARLITERAL	= 1,
     IDENTIFIER	= 2,
     OPERATOR	= 3,
 
-    // reserved words - must be in alphabetical order...
-    ARRAY		= 4,
-    BEGIN		= 5,
-    CONST		= 6,
-    DO			= 7,
-    ELSE		= 8,
-    END			= 9,
-    FOR                 = 10,      
-    FUNC		= 11,
-    IF			= 12,
-    IN			= 13,
-    LET			= 14,
-    OF			= 15,
-    PROC		= 16,
-    RECORD		= 17,
-    REPEAT              = 18,
-    SKIP                = 19,
-    THEN		= 20,
-    TYPE		= 21,
-    UNTIL               = 22,
-    VAR			= 23,
-    WHILE		= 24,
+    // Reserved words - must be in alphabetical order...
+    AND			= 4,           // EDWTORBA: Add AND token.
+    ARRAY		= 5,
+    BEGIN		= 6,           // EDWTORBA: DELETE BEGIN token.
+    CONST		= 7,
+    DO			= 8,
+    ELSE		= 9,
+    END			= 10,
+    FOR			= 11,           // EDWTORBA: Add FOR token.
+    FUNC		= 12,
+    IF			= 13,
+    IN			= 14,
+    LET			= 15,
+    LOCAL		= 16,           // EDWTORBA: Add LOCAL token.
+    OF			= 17,
+    PAR			= 18,           // EDWTORBA: Add PAR token.
+    PROC		= 19,
+    RECORD		= 20,
+    RECURSIVE   = 21,           // EDWTORBA: Add RECURSIVE token.
+    REPEAT		= 22,           // EDWTORBA: Add REPEAT token.
+    SKIP		= 23,           // EDWTORBA: Add SKIP token.
+    THEN		= 24,
+    TYPE		= 25,
+    TO			= 26,           // EDWTORBA: Add TO token.
+    UNTIL		= 27,           // EDWTORBA: Add UNITL token.
+    VAR			= 28,
+    WHILE		= 29,
 
     // punctuation...
-    DOT			= 25,
-    COLON		= 26,
-    SEMICOLON           = 27,
-    COMMA		= 28,
-    BECOMES		= 29,
-    IS			= 30,
+    DOT			= 30,
+    COLON		= 31,
+    SEMICOLON   = 32,
+    COMMA		= 33,
+    BECOMES		= 34,
+    IS			= 35,
 
     // brackets...
-    LPAREN		= 31,
-    RPAREN		= 32,
-    LBRACKET            = 33,
-    RBRACKET            = 34,
-    LCURLY		= 35,
-    RCURLY		= 36,
+    LPAREN		= 36,
+    RPAREN		= 37,
+    LBRACKET    = 38,
+    RBRACKET    = 39,
+    LCURLY		= 40,
+    RCURLY		= 41,
 
     // special tokens...
-    EOT			= 37,
-    ERROR		= 38;
+    EOT			= 42,
+    ERROR		= 43;
 
+  /**
+   * Define token table.
+   */
   private static String[] tokenTable = new String[] {
     "<int>",
     "<char>",
     "<identifier>",
     "<operator>",
+    "and",                      // EDWTORBA: Add AND token.
     "array",
-    "begin",
+    "begin",                    // EDWTORBA: DELETE BEGIN token.
     "const",
     "do",
     "else",
     "end",
-    "for",
+    "for",                      // EDWTORBA: Add FOR token.
     "func",
     "if",
     "in",
     "let",
+    "local",                     // EDWTORBA: Add LOCAL token.
     "of",
+    "par",                       // EDWTORBA: Add PAR token.
     "proc",
     "record",
-    "repeat",
-    "skip",
+    "recursive",                  // EDWTORBA: Add RECURSIVE token.
+    "repeat",                     // EDWTORBA: Add REPEAT token.
+    "skip",                       // EDWTORBA: Add SKIP token.
     "then",
     "type",
-    "until",
+    "to",                         // EDWTORBA: Add TO token.
+    "until",                      // EDWTORBA: Add UNTIL token.
     "var",
     "while",
     ".",
@@ -148,10 +191,10 @@ final class Token extends Object {
     "{",
     "}",
     "",
-    "<error>"
+    "<error>",
   };
 
-  private final static int	firstReservedWord = Token.ARRAY,
+  private final static int	firstReservedWord = Token.AND,
   				lastReservedWord  = Token.WHILE;
 
 }
