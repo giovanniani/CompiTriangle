@@ -277,19 +277,17 @@ public class Parser {
             {
                 Identifier iAST = parseIdentifier();
                 if (currentToken.kind == Token.LPAREN) {
-                  acceptIt();
-                  ActualParameterSequence apsAST = parseActualParameterSequence();
-                  accept(Token.RPAREN);
-                  finish(commandPos);
-                  commandAST = new CallCommand(iAST, apsAST, commandPos);
-
+                    acceptIt();
+                    ActualParameterSequence apsAST = parseActualParameterSequence();
+                    accept(Token.RPAREN);
+                    finish(commandPos);
+                    commandAST = new CallCommand(iAST, apsAST, commandPos);
                 } else {
-
-                  Vname vAST = parseRestOfVname(iAST);
-                  accept(Token.BECOMES);
-                  Expression eAST = parseExpression();
-                  finish(commandPos);
-                  commandAST = new AssignCommand(vAST, eAST, commandPos);
+                    Vname vAST = parseRestOfVname(iAST);
+                    accept(Token.BECOMES);
+                    Expression eAST = parseExpression();
+                    finish(commandPos);
+                    commandAST = new AssignCommand(vAST, eAST, commandPos);
                 }
             }
             break;
@@ -310,9 +308,9 @@ public class Parser {
                 Declaration dAST = parseDeclaration();
                 accept(Token.IN);
                 Command cAST = parseCommand();
+                accept(Token.END);
                 finish(commandPos);
                 commandAST = new LetCommand(dAST, cAST, commandPos);
-                accept(Token.END);
             }
             break;
 
@@ -357,7 +355,52 @@ public class Parser {
             // All FOR loop.
             case Token.FOR:
             {
+
                 acceptIt();
+                Command cAST;
+                Expression eAST3;
+                accept(Token.VAR);
+                Identifier iAST = parseIdentifier();
+                accept(Token.BECOMES);
+                Expression eAST1 = parseExpression();
+                accept(Token.TO);
+                Expression eAST2 = parseExpression();
+
+                switch (currentToken.kind) {
+
+                    case Token.DO:
+                        acceptIt();
+                        cAST = parseCommand();
+                        accept(Token.END);
+                        finish(commandPos);
+                        // TODO CREAR ARBOL SITACTICO PARA FOR DO.
+                        break;
+
+                    case Token.UNTIL:
+                        acceptIt();
+                        eAST3 = parseExpression();
+                        accept(Token.DO);
+                        cAST = parseCommand();
+                        accept(Token.END);
+                        finish(commandPos);
+                        // TODO CREAR ARBOL SITACTICO PARA FOR UNTIL DO.
+                        break;
+
+                    case Token.WHILE:
+                        acceptIt();
+                        eAST3 = parseExpression();
+                        accept(Token.DO);
+                        cAST = parseCommand();
+                         accept(Token.END);
+                        finish(commandPos);
+                        // TODO CREAR ARBOL SITACTICO PARA FOR WHILE DO.
+                        break;
+
+                    default:
+                        syntacticError("\"%\" Unexpected token. 'Do', 'While' or 'Until' was expected.", currentToken.spelling);
+                        break;
+
+                }
 
             }
             break;
@@ -379,27 +422,29 @@ public class Parser {
                         cAST = parseCommand();
 
                         switch(currentToken.kind) {
+
                             case Token.UNTIL:
                                 // "repeat" "do" Command "until" Expression "end".
                                 acceptIt();
                                 eAST = parseExpression();
-                                commandAST = new UntilCommand(eAST, cAST, commandPos);
-                                finish(commandPos);
                                 accept(Token.END);
+                                finish(commandPos);
+                                commandAST = new UntilCommand(eAST, cAST, commandPos);
                                 break;
 
                             case Token.WHILE:
                                 // "repeat" "do" Command "while" Expression "end".
                                 acceptIt();
                                 eAST = parseExpression();
-                                commandAST = new WhileCommand(eAST, cAST, commandPos);
+                                accept(Token.END);
                                 finish(commandPos);
-                                accept(Token.END);                        
+                                commandAST = new WhileCommand(eAST, cAST, commandPos);
                                 break;
 
                             default:
                                 syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
                                 break;
+
                         }
 
                         break;
@@ -411,9 +456,9 @@ public class Parser {
                         eAST = parseExpression();
                         accept(Token.DO);
                         cAST = parseCommand();
-                        commandAST = new UntilCommand(eAST, cAST, commandPos);
                         accept(Token.END);
                         finish(commandPos);
+                        commandAST = new UntilCommand(eAST, cAST, commandPos);
 
                         break;
 
@@ -424,9 +469,9 @@ public class Parser {
                         eAST = parseExpression();
                         accept(Token.DO);
                         cAST = parseCommand();
-                        commandAST = new WhileCommand(eAST, cAST, commandPos);
                         accept(Token.END);
                         finish(commandPos);
+                        commandAST = new WhileCommand(eAST, cAST, commandPos);
 
                         break;
 

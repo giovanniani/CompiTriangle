@@ -118,8 +118,8 @@ final class Token extends Object {
     REPEAT		= 21,           // EDWTORBA: Add REPEAT token.
     SKIP		= 22,           // EDWTORBA: Add SKIP token.
     THEN		= 23,
-    TYPE		= 24,
-    TO			= 25,           // EDWTORBA: Add TO token.
+    TO			= 24,           // EDWTORBA: Add TO token.
+    TYPE		= 25,
     UNTIL		= 26,           // EDWTORBA: Add UNITL token.
     VAR			= 27,
     WHILE		= 28,
@@ -173,8 +173,8 @@ final class Token extends Object {
     "repeat",                     // EDWTORBA: Add REPEAT token.
     "skip",                       // EDWTORBA: Add SKIP token.
     "then",
-    "type",
     "to",                         // EDWTORBA: Add TO token.
+    "type",
     "until",                      // EDWTORBA: Add UNTIL token.
     "var",
     "while",
