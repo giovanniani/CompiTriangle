@@ -91,58 +91,58 @@ final class Token extends Object {
   public static final int
 
     // Literals.
-    INTLITERAL	= 0,
-    CHARLITERAL	= 1,
-    IDENTIFIER	= 2,
-    OPERATOR	= 3,
+    INTLITERAL          = 0,
+    CHARLITERAL         = 1,
+    IDENTIFIER          = 2,
+    OPERATOR            = 3,
 
     // Reserved words - must be in alphabetical order...
     AND			= 4,           // EDWTORBA: Add AND token.
     ARRAY		= 5,
-    BEGIN		= 6,           // EDWTORBA: DELETE BEGIN token.
-    CONST		= 7,
-    DO			= 8,
-    ELSE		= 9,
-    END			= 10,
-    FOR			= 11,           // EDWTORBA: Add FOR token.
-    FUNC		= 12,
-    IF			= 13,
-    IN			= 14,
-    LET			= 15,
-    LOCAL		= 16,           // EDWTORBA: Add LOCAL token.
-    OF			= 17,
-    PAR			= 18,           // EDWTORBA: Add PAR token.
-    PROC		= 19,
-    RECORD		= 20,
-    RECURSIVE   = 21,           // EDWTORBA: Add RECURSIVE token.
-    REPEAT		= 22,           // EDWTORBA: Add REPEAT token.
-    SKIP		= 23,           // EDWTORBA: Add SKIP token.
-    THEN		= 24,
-    TYPE		= 25,
-    TO			= 26,           // EDWTORBA: Add TO token.
-    UNTIL		= 27,           // EDWTORBA: Add UNITL token.
-    VAR			= 28,
-    WHILE		= 29,
+    //BEGIN		= 6,           // EDWTORBA: DELETE BEGIN token.
+    CONST		= 6,
+    DO			= 7,
+    ELSE		= 8,
+    END			= 9,
+    FOR			= 10,           // EDWTORBA: Add FOR token.
+    FUNC		= 11,
+    IF			= 12,
+    IN			= 13,
+    LET			= 14,
+    LOCAL		= 15,           // EDWTORBA: Add LOCAL token.
+    OF			= 16,
+    PAR			= 17,           // EDWTORBA: Add PAR token.
+    PROC		= 18,
+    RECORD		= 19,
+    RECURSIVE           = 20,           // EDWTORBA: Add RECURSIVE token.
+    REPEAT		= 21,           // EDWTORBA: Add REPEAT token.
+    SKIP		= 22,           // EDWTORBA: Add SKIP token.
+    THEN		= 23,
+    TYPE		= 24,
+    TO			= 25,           // EDWTORBA: Add TO token.
+    UNTIL		= 26,           // EDWTORBA: Add UNITL token.
+    VAR			= 27,
+    WHILE		= 28,
 
-    // punctuation...
-    DOT			= 30,
-    COLON		= 31,
-    SEMICOLON   = 32,
-    COMMA		= 33,
-    BECOMES		= 34,
-    IS			= 35,
+    // Punctuation ...
+    DOT			= 29,
+    COLON		= 30,
+    SEMICOLON           = 31,
+    COMMA		= 32,
+    BECOMES		= 33,
+    IS			= 34,
 
-    // brackets...
-    LPAREN		= 36,
-    RPAREN		= 37,
-    LBRACKET    = 38,
-    RBRACKET    = 39,
-    LCURLY		= 40,
-    RCURLY		= 41,
+    // Brackets ...
+    LPAREN		= 35,
+    RPAREN		= 36,
+    LBRACKET            = 37,
+    RBRACKET            = 38,
+    LCURLY		= 39,
+    RCURLY		= 40,
 
-    // special tokens...
-    EOT			= 42,
-    ERROR		= 43;
+    // Special tokens ...
+    EOT			= 41,
+    ERROR		= 42;
 
   /**
    * Define token table.
@@ -154,7 +154,7 @@ final class Token extends Object {
     "<operator>",
     "and",                      // EDWTORBA: Add AND token.
     "array",
-    "begin",                    // EDWTORBA: DELETE BEGIN token.
+    //"begin",                  // EDWTORBA: DELETE BEGIN token.
     "const",
     "do",
     "else",

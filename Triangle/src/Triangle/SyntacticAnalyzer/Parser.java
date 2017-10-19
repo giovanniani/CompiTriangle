@@ -265,195 +265,196 @@ public class Parser {
     return commandAST;
   }
 
-  Command parseSingleCommand() throws SyntaxError {
-    Command commandAST = null; // in case there's a syntactic error
+    Command parseSingleCommand() throws SyntaxError {
+        Command commandAST = null; // in case there's a syntactic error
 
-    SourcePosition commandPos = new SourcePosition();
-    start(commandPos);
+        SourcePosition commandPos = new SourcePosition();
+        start(commandPos);
 
-    switch (currentToken.kind) {
+        switch (currentToken.kind) {
 
-    case Token.IDENTIFIER:
-      {
-        Identifier iAST = parseIdentifier();
-        if (currentToken.kind == Token.LPAREN) {
-          acceptIt();
-          ActualParameterSequence apsAST = parseActualParameterSequence();
-          accept(Token.RPAREN);
-          finish(commandPos);
-          commandAST = new CallCommand(iAST, apsAST, commandPos);
+            case Token.IDENTIFIER:
+            {
+                Identifier iAST = parseIdentifier();
+                if (currentToken.kind == Token.LPAREN) {
+                  acceptIt();
+                  ActualParameterSequence apsAST = parseActualParameterSequence();
+                  accept(Token.RPAREN);
+                  finish(commandPos);
+                  commandAST = new CallCommand(iAST, apsAST, commandPos);
 
-        } else {
+                } else {
 
-          Vname vAST = parseRestOfVname(iAST);
-          accept(Token.BECOMES);
-          Expression eAST = parseExpression();
-          finish(commandPos);
-          commandAST = new AssignCommand(vAST, eAST, commandPos);
-        }
-      }
-      break;
+                  Vname vAST = parseRestOfVname(iAST);
+                  accept(Token.BECOMES);
+                  Expression eAST = parseExpression();
+                  finish(commandPos);
+                  commandAST = new AssignCommand(vAST, eAST, commandPos);
+                }
+            }
+            break;
 
-    // EDWTORBA: Delete commands.
-    case Token.BEGIN:
-      acceptIt();
-      commandAST = parseCommand();
-      accept(Token.END);
-      break;
-
-    case Token.LET:
-      {
-        acceptIt();
-        Declaration dAST = parseDeclaration();
-        accept(Token.IN);
-        Command cAST = parseCommand();
-        finish(commandPos);
-        commandAST = new LetCommand(dAST, cAST, commandPos);
-        accept(Token.END);
-      }
-      break;
-
-    case Token.IF:
-      {
-        acceptIt();
-        Expression eAST = parseExpression();
-        accept(Token.THEN);
-        Command c1AST = parseSingleCommand();
-        accept(Token.ELSE);
-        Command c2AST = parseSingleCommand();
-        accept(Token.END);
-        finish(commandPos);
-        commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
-      }
-      break;
-/*
-    case Token.WHILE:
-      {
-        acceptIt();
-        Expression eAST = parseExpression();
-        accept(Token.DO);
-        Command cAST = parseSingleCommand();
-        finish(commandPos);
-        commandAST = new WhileCommand(eAST, cAST, commandPos);
-      }
-      break;
-*/
-
-    /**
-     * GEOVANNI: Add new commands.
-     */
-    case Token.SKIP:
-        acceptIt();
-        commandAST= new EmptyCommand(commandPos);
-    break;
-
-    /**
-     * All Repeat loop.
-     */
-    
-    case Token.FOR:
-    {
-        acceptIt();
-        
-    }
-    
-    
-    case Token.REPEAT:
-    {
-
-        Command cAST;
-        Expression eAST;
-        acceptIt();
-
-        switch(currentToken.kind) {
-
-            // REPEAT DO.
-            case Token.DO:
-
+            // EDWTORBA: Delete BEGIN command.
+            /*
+            case Token.BEGIN:
                 acceptIt();
-                cAST = parseCommand();
-                
-                System.out.println("token:"+currentToken.kind);
-                switch(currentToken.kind)
-                {
+                commandAST = parseCommand();
+                accept(Token.END);
+                break;
+            */
+
+            // Alter LET command: "let" Declaration "in" single-Command. for: "let" Declaration "in" Command "end".
+            case Token.LET:
+            {
+                acceptIt();
+                Declaration dAST = parseDeclaration();
+                accept(Token.IN);
+                Command cAST = parseCommand();
+                finish(commandPos);
+                commandAST = new LetCommand(dAST, cAST, commandPos);
+                accept(Token.END);
+            }
+            break;
+
+            // Alter IF command: "if" Expression "then" single-Command "else" single-Command. for: "if" Expression "then" Command "else" Command "end".
+            case Token.IF:
+            {
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.THEN);
+                Command c1AST = parseCommand();
+                accept(Token.ELSE);
+                Command c2AST = parseCommand();
+                accept(Token.END);
+                finish(commandPos);
+                commandAST = new IfCommand(eAST, c1AST, c2AST, commandPos);
+            }
+            break;
+
+            // EDWTORBA: Delete "while" token.
+            /*
+            case Token.WHILE:
+              {
+                acceptIt();
+                Expression eAST = parseExpression();
+                accept(Token.DO);
+                Command cAST = parseSingleCommand();
+                finish(commandPos);
+                commandAST = new WhileCommand(eAST, cAST, commandPos);
+              }
+              break;
+            */
+
+            /**
+             * GEOVANNI: Add new commands.
+             */
+
+            case Token.SKIP:
+                acceptIt();
+                commandAST= new EmptyCommand(commandPos);
+            break;
+
+            // All FOR loop.
+            case Token.FOR:
+            {
+                acceptIt();
+
+            }
+            break;
+
+            // All Repeat loop.
+            case Token.REPEAT:
+            {
+
+                Command cAST;
+                Expression eAST;
+                acceptIt();
+
+                switch(currentToken.kind) {
+
+                    // REPEAT DO.
+                    case Token.DO:
+
+                        acceptIt();
+                        cAST = parseCommand();
+
+                        switch(currentToken.kind) {
+                            case Token.UNTIL:
+                                // "repeat" "do" Command "until" Expression "end".
+                                acceptIt();
+                                eAST = parseExpression();
+                                commandAST = new UntilCommand(eAST, cAST, commandPos);
+                                finish(commandPos);
+                                accept(Token.END);
+                                break;
+
+                            case Token.WHILE:
+                                // "repeat" "do" Command "while" Expression "end".
+                                acceptIt();
+                                eAST = parseExpression();
+                                commandAST = new WhileCommand(eAST, cAST, commandPos);
+                                finish(commandPos);
+                                accept(Token.END);                        
+                                break;
+
+                            default:
+                                syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
+                                break;
+                        }
+
+                        break;
+
+                    // "repeat" "until" Expression "do" Command "end".
                     case Token.UNTIL:
-                        // REPEAT DO COMMAND UNTIL EXPRESSION END.
+
                         acceptIt();
                         eAST = parseExpression();
+                        accept(Token.DO);
+                        cAST = parseCommand();
                         commandAST = new UntilCommand(eAST, cAST, commandPos);
-                        finish(commandPos);
                         accept(Token.END);
+                        finish(commandPos);
+
                         break;
-                    
+
+                    // "repeat" "while" Expression "do" Command "end".
                     case Token.WHILE:
-                        // REPEAT DO COMMAND WHILE EXPRESSION END.
+
                         acceptIt();
                         eAST = parseExpression();
+                        accept(Token.DO);
+                        cAST = parseCommand();
                         commandAST = new WhileCommand(eAST, cAST, commandPos);
+                        accept(Token.END);
                         finish(commandPos);
-                        accept(Token.END);                        
+
                         break;
-                        
+
                     default:
-                        syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
+                        syntacticError("\"%\" Unexpected token. 'Do' or 'While' was expected.", currentToken.spelling);
                         break;
                 }
 
-                break;
+            }
+            break;
 
-            // REPEAT UNTIL EXPRESSION DO COMMAND END.
-            case Token.UNTIL:
-
-                acceptIt();
-                eAST = parseExpression();
-                accept(Token.DO);
-                cAST = parseCommand();
-                commandAST = new UntilCommand(eAST, cAST, commandPos);
-                accept(Token.END);
+            case Token.SEMICOLON:
+            case Token.END:
+            case Token.ELSE:
+            case Token.IN:
+            case Token.EOT:
                 finish(commandPos);
-
-                break;
-
-            // REPEAT WHILE EXPRESSION DO COMMAND END.
-            case Token.WHILE:
-
-                acceptIt();
-                eAST = parseExpression();
-                accept(Token.DO);
-                cAST = parseCommand();
-                commandAST = new WhileCommand(eAST, cAST, commandPos);
-                accept(Token.END);
-                finish(commandPos);
-
+                commandAST = new EmptyCommand(commandPos);
                 break;
 
             default:
-                syntacticError("\"%\" Unexpected token. 'Do' or 'While' was expected.", currentToken.spelling);
+                syntacticError("\"%\" cannot start a command", currentToken.spelling);
                 break;
+
         }
 
+        return commandAST;
     }
-    break;
-
-    case Token.SEMICOLON:
-    case Token.END:
-    case Token.ELSE:
-    case Token.IN:
-    case Token.EOT:
-
-      finish(commandPos);
-      commandAST = new EmptyCommand(commandPos);
-      break;
-
-    default:
-      syntacticError("\"%\" cannot start a command",
-        currentToken.spelling);
-      break;
-
-    }
-
-    return commandAST;
-  }
 
 ///////////////////////////////////////////////////////////////////////////////
 //
@@ -712,38 +713,38 @@ public class Parser {
     switch (currentToken.kind) {
 
     case Token.CONST:
-      {
+    {
         acceptIt();
         Identifier iAST = parseIdentifier();
         accept(Token.IS);
         Expression eAST = parseExpression();
         finish(declarationPos);
         declarationAST = new ConstDeclaration(iAST, eAST, declarationPos);
-      }
-      break;
+    }
+    break;
 
     case Token.VAR:
-      {
+    {
+
         acceptIt();
         Identifier iAST = parseIdentifier();
         accept(Token.COLON);
         TypeDenoter tAST = parseTypeDenoter();
         finish(declarationPos);
         declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
-        Vname vAST = parseRestOfVname(iAST);
-        if(currentToken.kind == Token.BECOMES)
-        {
 
-            accept(Token.BECOMES);
+        if (currentToken.kind == Token.BECOMES) {
+            acceptIt();
+            Vname vAST = parseRestOfVname(iAST);
             Expression eAST = parseExpression();
             finish(declarationPos);
             commandAST = new AssignCommand(vAST, eAST, declarationPos);
         }
-        accept(Token.SEMICOLON);
 
-        
-      }
-      break;
+        //accept(Token.SEMICOLON);
+
+    }
+    break;
 
     case Token.PROC:
       {
