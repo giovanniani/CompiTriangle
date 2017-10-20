@@ -1,5 +1,6 @@
 let
-	var num: Integer := 2
+	var num := 2
+	!var num: Integer
 in
 
 	num := 2;

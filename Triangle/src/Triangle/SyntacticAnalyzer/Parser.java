@@ -80,6 +80,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
@@ -376,7 +381,8 @@ public class Parser {
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        // TODO CREAR ARBOL SITACTICO PARA FOR DO.
+                        // TODO CREAR ARBOL SINTÁCTICO PARA FOR DO.
+                        commandAST = new ForDoCommand(eAST1, cAST, commandPos);
                         break;
 
                     case Token.UNTIL:
@@ -386,7 +392,8 @@ public class Parser {
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        // TODO CREAR ARBOL SITACTICO PARA FOR UNTIL DO.
+                        // TODO CREAR ARBOL SINTÁCTICO PARA FOR UNTIL DO.
+                        commandAST = new ForUntilDoCommand(eAST1, cAST, commandPos);
                         break;
 
                     case Token.WHILE:
@@ -396,7 +403,8 @@ public class Parser {
                         cAST = parseCommand();
                          accept(Token.END);
                         finish(commandPos);
-                        // TODO CREAR ARBOL SITACTICO PARA FOR WHILE DO.
+                        // TODO CREAR ARBOL SINTÁCTICO PARA FOR WHILE DO.
+                        commandAST = new ForWhileDoCommand(eAST1, cAST, commandPos);
                         break;
 
                     default:
@@ -777,6 +785,30 @@ public class Parser {
 
         acceptIt();
         Identifier iAST = parseIdentifier();
+        switch (currentToken.kind) {
+
+            case Token.COLON:
+                acceptIt();
+                TypeDenoter tAST = parseTypeDenoter();
+                finish(declarationPos);
+                declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
+                break;
+
+            case Token.BECOMES:
+                acceptIt();
+                Expression eAST = parseExpression();
+                finish(declarationPos);
+                declarationAST = new VarDeclarationInitialization(iAST, eAST, declarationPos);
+                break;
+            
+            default:
+                syntacticError("\"%\" Unexpected token. ':' or ':=' was expected.", currentToken.spelling);
+                break;
+            
+        }
+/*
+        acceptIt();
+        Identifier iAST = parseIdentifier();
         accept(Token.COLON);
         TypeDenoter tAST = parseTypeDenoter();
         finish(declarationPos);
@@ -789,9 +821,7 @@ public class Parser {
             finish(declarationPos);
             commandAST = new AssignCommand(vAST, eAST, declarationPos);
         }
-
-        //accept(Token.SEMICOLON);
-
+*/
     }
     break;
 

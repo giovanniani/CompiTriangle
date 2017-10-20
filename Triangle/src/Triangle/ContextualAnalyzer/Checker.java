@@ -84,6 +84,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
@@ -154,6 +159,60 @@ public final class Checker implements Visitor {
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     if (! eType.equals(StdEnvironment.booleanType))
       reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    ast.C.visit(this, null);
+    return null;
+  }
+
+  /**
+   * EDWTORBA: Add visitForDoCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitForDoCommand(ForDoCommand ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+
+    if (! eType.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    }
+
+    ast.C.visit(this, null);
+    return null;
+  }
+
+  /**
+   * EDWTORBA: Add visitForUntilDoCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+
+    if (! eType.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    }
+
+    ast.C.visit(this, null);
+    return null;
+  }
+
+  /**
+   * EDWTORBA: Add visitForWhileDoCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+
+    if (! eType.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    }
+
     ast.C.visit(this, null);
     return null;
   }
@@ -419,6 +478,42 @@ public final class Checker implements Visitor {
     if (ast.duplicated)
       reporter.reportError ("identifier \"%\" already declared",
                             ast.I.spelling, ast.position);
+
+    return null;
+  }
+
+  /**
+   * EDWTORBA: Add ForVarDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitForVarDeclaration(ForVarDeclaration ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    idTable.enter(ast.I.spelling, ast);
+
+    if (ast.duplicated) {
+      reporter.reportError ("identifier \"%\" already declared", ast.I.spelling, ast.position);
+    }
+
+    return null;
+  }
+
+  /**
+   * EDWTORBA: Add VarDeclarationInitialization.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o) {
+    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    idTable.enter(ast.I.spelling, ast);
+
+    if (ast.duplicated) {
+      reporter.reportError ("identifier \"%\" already declared", ast.I.spelling, ast.position);
+    }
 
     return null;
   }
@@ -769,9 +864,10 @@ public final class Checker implements Visitor {
     ast.variable = false;
     ast.type = StdEnvironment.errorType;
     Declaration binding = (Declaration) ast.I.visit(this, null);
-    if (binding == null)
+    if (binding == null) {
       reportUndeclared(ast.I);
-    else
+    } else {
+
       if (binding instanceof ConstDeclaration) {
         ast.type = ((ConstDeclaration) binding).E.type;
         ast.variable = false;
@@ -784,9 +880,20 @@ public final class Checker implements Visitor {
       } else if (binding instanceof VarFormalParameter) {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
-      } else
-        reporter.reportError ("\"%\" is not a const or var identifier",
-                              ast.I.spelling, ast.I.position);
+      } else if (binding instanceof ForVarDeclaration) {
+        // EDWTORBA: Add ForVarDeclaration.
+        ast.type = ((ForVarDeclaration) binding).E.type;
+        ast.variable = false;
+      } else if (binding instanceof VarDeclarationInitialization) {
+        // EDWTORBA: Add ForVarDeclaration.
+        ast.type = ((VarDeclarationInitialization) binding).E.type;
+        ast.variable = true;
+      } else {
+        reporter.reportError ("\"%\" is not a const or var identifier", ast.I.spelling, ast.I.position);
+      }
+
+    }
+
     return ast.type;
   }
 

@@ -30,6 +30,9 @@ public interface Visitor {
   public abstract Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o);
   public abstract Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o);
   public abstract Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o);
+  public abstract Object visitForDoCommand(ForDoCommand ast, Object o);
+  public abstract Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o);
+  public abstract Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o);
 
   // Expressions
   public abstract Object visitArrayExpression(ArrayExpression ast, Object o);
@@ -53,6 +56,10 @@ public interface Visitor {
   public abstract Object visitTypeDeclaration(TypeDeclaration ast, Object o);
   public abstract Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast, Object o);
   public abstract Object visitVarDeclaration(VarDeclaration ast, Object o);
+
+  // EDWTORBA: Add new commands.
+  public abstract Object visitForVarDeclaration(ForVarDeclaration ast, Object o);
+  public abstract Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o);
 
   // Array Aggregates
   public abstract Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o);

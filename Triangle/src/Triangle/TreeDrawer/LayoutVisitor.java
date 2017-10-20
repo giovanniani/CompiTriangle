@@ -79,6 +79,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
@@ -123,6 +128,39 @@ public class LayoutVisitor implements Visitor {
 
   public Object visitWhileCommand(WhileCommand ast, Object obj) {
     return layoutBinary("WhileCom.", ast.E, ast.C);
+  }
+
+  /**
+   * EDWTORBA: Add visitForDoCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitForDoCommand(ForDoCommand ast, Object obj) {
+    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
+  }
+
+  /**
+   * EDWTORBA: Add visitForWhileDoCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
+    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
+  }
+
+  /**
+   * EDWTORBA: Add visitForWhileDoCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object obj) {
+    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
   }
 
   /**
@@ -246,6 +284,14 @@ public class LayoutVisitor implements Visitor {
 
   public Object visitVarDeclaration(VarDeclaration ast, Object obj) {
     return layoutBinary("VarDecl.", ast.I, ast.T);
+  }
+
+  public Object visitForVarDeclaration(ForVarDeclaration ast, Object obj) {
+    return layoutBinary("ForVarDecl.", ast.I, ast.E);
+  }
+
+  public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object obj) {
+    return layoutBinary("VarDeclInit.", ast.I, ast.E);
   }
 
 

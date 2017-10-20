@@ -67,6 +67,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
+import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.ForDoCommand;
+import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
+import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
 import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
 import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
@@ -121,6 +126,39 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
+     * EDWTORBA: Add visitForDoCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitForDoCommand(ForDoCommand ast, Object obj) {
+        return(createBinary("For Do Command", ast.E, ast.C));
+    }
+
+    /**
+     * EDWTORBA: Add visitForWhileDoCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
+        return(createBinary("For Do Command", ast.E, ast.C));
+    }
+
+    /**
+     * EDWTORBA: Add visitForUntilDoCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object obj) {
+        return(createBinary("For Do Command", ast.E, ast.C));
+    }
+
+    /**
      * EDWTORBA: Add visitRepeatDoUntilCommand.
      * 
      * @param ast
@@ -128,7 +166,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) {
-        return(createBinary("Until Command", ast.E, ast.C));
+        return(createBinary("Repeat Do Until Command", ast.E, ast.C));
     }
 
     /**
@@ -139,7 +177,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) {
-        return(createBinary("While Command", ast.E, ast.C));
+        return(createBinary("Repeat Do While Command", ast.E, ast.C));
     }
 
     /**
@@ -150,7 +188,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object obj) {
-        return(createBinary("Until Command", ast.E, ast.C));
+        return(createBinary("Repeat Until Command", ast.E, ast.C));
     }
 
     /**
@@ -161,7 +199,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object obj) {
-        return(createBinary("While Command", ast.E, ast.C));
+        return(createBinary("Repeat While Command", ast.E, ast.C));
     }
 
     // </editor-fold>
@@ -246,6 +284,29 @@ public class TreeVisitor implements Visitor {
     public Object visitVarDeclaration(VarDeclaration ast, Object obj) {
         return(createBinary("Variable Declaration", ast.I, ast.T));
     }
+
+    /**
+     * EDWTORBA: Add ForVarDeclaration.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitForVarDeclaration(ForVarDeclaration ast, Object obj) {
+        return(createBinary("For Variable Declaration", ast.I, ast.E));
+    }
+
+    /**
+     * EDWTORBA: Add VarDeclarationInitialization.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object obj) {
+        return(createBinary("Variable Declaration Initialization", ast.I, ast.E));
+    }
+
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Aggregates ">
