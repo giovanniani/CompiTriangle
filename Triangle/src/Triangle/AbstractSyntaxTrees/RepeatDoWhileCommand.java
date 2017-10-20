@@ -1,5 +1,5 @@
 /*
- * @(#)UntilCommand.java                        2017/10/17.
+ * @(#)RepeatDoWhileCommand.java                        17/10/2017
  *
  * Copyright (C) 1999, 2017 Edwin Torrez Barrera
  * Dept. of Computing Ing, ITCR, Cartago, Costa Rica.
@@ -14,16 +14,16 @@ package Triangle.AbstractSyntaxTrees;
 
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
-public class UntilCommand extends Command {
+public class RepeatDoWhileCommand extends Command {
 
-  public UntilCommand (Expression eAST, Command cAST, SourcePosition thePosition) {
+  public RepeatDoWhileCommand (Expression eAST, Command cAST, SourcePosition thePosition) {
     super (thePosition);
     E = eAST;
     C = cAST;
   }
 
   public Object visit(Visitor v, Object o) {
-    return v.visitUntilCommand(this, o);
+    return v.visitRepeatDoWhileCommand(this, o);
   }
 
   public Expression E;

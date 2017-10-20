@@ -4,11 +4,15 @@ let
 	var num: Integer
 in
 
-begin
-
 	num := 1;
 
-	repeat do
+	if (num = 2) then
+		put('O')
+	else
+		put('M')
+	end;
+
+	repeat while (num < 5) do
 
 		num := num +1;
 
@@ -17,7 +21,7 @@ begin
 		else
 			put('M')
 
-	while (num < 5)
+		end
 
 	end
 

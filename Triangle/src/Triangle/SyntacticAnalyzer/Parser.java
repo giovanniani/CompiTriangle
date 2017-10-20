@@ -80,7 +80,10 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.UntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 
 public class Parser {
@@ -429,7 +432,7 @@ public class Parser {
                                 eAST = parseExpression();
                                 accept(Token.END);
                                 finish(commandPos);
-                                commandAST = new UntilCommand(eAST, cAST, commandPos);
+                                commandAST = new RepeatDoUntilCommand(eAST, cAST, commandPos);
                                 break;
 
                             case Token.WHILE:
@@ -438,7 +441,7 @@ public class Parser {
                                 eAST = parseExpression();
                                 accept(Token.END);
                                 finish(commandPos);
-                                commandAST = new WhileCommand(eAST, cAST, commandPos);
+                                commandAST = new RepeatDoWhileCommand(eAST, cAST, commandPos);
                                 break;
 
                             default:
@@ -458,7 +461,7 @@ public class Parser {
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        commandAST = new UntilCommand(eAST, cAST, commandPos);
+                        commandAST = new RepeatUntilCommand(eAST, cAST, commandPos);
 
                         break;
 
@@ -471,7 +474,7 @@ public class Parser {
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        commandAST = new WhileCommand(eAST, cAST, commandPos);
+                        commandAST = new RepeatWhileCommand(eAST, cAST, commandPos);
 
                         break;
 
@@ -732,21 +735,22 @@ public class Parser {
 //
 ///////////////////////////////////////////////////////////////////////////////
 
-  Declaration parseDeclaration() throws SyntaxError {
-    Declaration declarationAST = null; // in case there's a syntactic error
+    Declaration parseDeclaration() throws SyntaxError {
+        Declaration declarationAST = null; // in case there's a syntactic error
 
-    SourcePosition declarationPos = new SourcePosition();
-    start(declarationPos);
-    declarationAST = parseSingleDeclaration();
-    while (currentToken.kind == Token.SEMICOLON) {
-      acceptIt();
-      Declaration d2AST = parseSingleDeclaration();
-      finish(declarationPos);
-      declarationAST = new SequentialDeclaration(declarationAST, d2AST,
-        declarationPos);
+        SourcePosition declarationPos = new SourcePosition();
+        start(declarationPos);
+        declarationAST = parseSingleDeclaration();
+
+        while (currentToken.kind == Token.SEMICOLON) {
+            acceptIt();
+            Declaration d2AST = parseSingleDeclaration();
+            finish(declarationPos);
+            declarationAST = new SequentialDeclaration(declarationAST, d2AST, declarationPos);
+        }
+
+        return declarationAST;
     }
-    return declarationAST;
-  }
 
   Declaration parseSingleDeclaration() throws SyntaxError {
     Command commandAST = null; // in case there's a syntactic error

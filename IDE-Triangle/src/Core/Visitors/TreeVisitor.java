@@ -67,7 +67,10 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.UntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -112,21 +115,55 @@ public class TreeVisitor implements Visitor {
     public Object visitSequentialCommand(SequentialCommand ast, Object obj) {
         return(createBinary("Sequential Command", ast.C1, ast.C2));
     }
-    
+
+    public Object visitWhileCommand(WhileCommand ast, Object obj) {
+        return(createBinary("While Command", ast.E, ast.C));
+    }
+
     /**
-     * EDWTORBA: Add visitUntilCommand.
+     * EDWTORBA: Add visitRepeatDoUntilCommand.
      * 
      * @param ast
      * @param obj
      * @return 
      */
-    public Object visitUntilCommand(UntilCommand ast, Object obj) {
+    public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) {
         return(createBinary("Until Command", ast.E, ast.C));
     }
 
-    public Object visitWhileCommand(WhileCommand ast, Object obj) {
+    /**
+     * EDWTORBA: Add visitRepeatDoWhileCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) {
         return(createBinary("While Command", ast.E, ast.C));
     }
+
+    /**
+     * EDWTORBA: Add visitRepeatUntilCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object obj) {
+        return(createBinary("Until Command", ast.E, ast.C));
+    }
+
+    /**
+     * EDWTORBA: Add visitRepeatWhileCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object obj) {
+        return(createBinary("While Command", ast.E, ast.C));
+    }
+
     // </editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc=" Expressions ">

@@ -1,0 +1,11 @@
+let
+	var n1: Integer;
+	var n2: Integer;
+	var num: Integer
+in
+
+	for var test := 2 to 5 until 10 do
+		put('M')
+	end
+
+end

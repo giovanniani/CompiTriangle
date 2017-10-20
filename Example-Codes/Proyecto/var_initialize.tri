@@ -1,0 +1,14 @@
+let
+	var num: Integer := 2
+in
+
+	num := 2;
+
+	repeat do
+		num := num +1;
+		put('O')
+	while (num < 5)
+	end
+
+
+end

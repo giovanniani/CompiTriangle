@@ -67,7 +67,10 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.UntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 import Triangle.CodeGenerator.Field;
 import Triangle.CodeGenerator.KnownAddress;
@@ -135,26 +138,69 @@ public class TableVisitor implements Visitor {
       return(null);
   }
   
-  /**
-   * EDWTORBA: Add visitUntilCommand.
-   * 
-   * @param ast
-   * @param o
-   * @return 
-   */
-  public Object visitUntilCommand(UntilCommand ast, Object o) { 
-      ast.E.visit(this, null);
-      ast.C.visit(this, null);
-      
-      return(null);
-  }
-
   public Object visitWhileCommand(WhileCommand ast, Object o) { 
       ast.E.visit(this, null);
       ast.C.visit(this, null);
       
       return(null);
   }
+
+  /**
+   * EDWTORBA: Add visitDoRepeatUntilCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) { 
+      ast.E.visit(this, null);
+      ast.C.visit(this, null);
+      
+      return(null);
+  }
+
+  /**
+   * EDWTORBA: Add visitRepeatDoWhileCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) { 
+      ast.E.visit(this, null);
+      ast.C.visit(this, null);
+      
+      return(null);
+  }
+
+  /**
+   * EDWTORBA: Add visitRepeatUntilCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o) { 
+      ast.E.visit(this, null);
+      ast.C.visit(this, null);
+      
+      return(null);
+  }
+
+  /**
+   * EDWTORBA: Add visitRepeatWhileCommand.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object o) { 
+      ast.E.visit(this, null);
+      ast.C.visit(this, null);
+      
+      return(null);
+  }
+
   // </editor-fold>
 
   // <editor-fold defaultstate="collapsed" desc=" Expressions ">

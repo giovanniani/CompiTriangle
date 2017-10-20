@@ -79,7 +79,10 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.UntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatDoWhileCommand;
+import Triangle.AbstractSyntaxTrees.RepeatUntilCommand;
+import Triangle.AbstractSyntaxTrees.RepeatWhileCommand;
 import Triangle.AbstractSyntaxTrees.WhileCommand;
 
 public class LayoutVisitor implements Visitor {
@@ -118,21 +121,53 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("Seq.Com.", ast.C1, ast.C2);
   }
 
+  public Object visitWhileCommand(WhileCommand ast, Object obj) {
+    return layoutBinary("WhileCom.", ast.E, ast.C);
+  }
+
   /**
-   * EDWTORBA: Add visitUntilCommand.
+   * EDWTORBA: Add visitRepeatDoUntilCommand.
    * 
    * @param ast
    * @param obj
    * @return 
    */
-  public Object visitUntilCommand(UntilCommand ast, Object obj) {
-    return layoutBinary("UntilCom.", ast.E, ast.C);
+  public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object obj) {
+    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
   }
 
-  public Object visitWhileCommand(WhileCommand ast, Object obj) {
-    return layoutBinary("WhileCom.", ast.E, ast.C);
+  /**
+   * EDWTORBA: Add visitRepeatDoWhileCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object obj) {
+    return layoutBinary("RepeatDoWhileCom.", ast.E, ast.C);
   }
 
+  /**
+   * EDWTORBA: Add visitRepeatUntilCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object obj) {
+    return layoutBinary("RepeatUntilCom.", ast.E, ast.C);
+  }
+
+  /**
+   * EDWTORBA: Add visitRepeatWhileCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitRepeatWhileCommand(RepeatWhileCommand ast, Object obj) {
+    return layoutBinary("RepeatWhileCom.", ast.E, ast.C);
+  }
 
   // Expressions
   public Object visitArrayExpression(ArrayExpression ast, Object obj) {
