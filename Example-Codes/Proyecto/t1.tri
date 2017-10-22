@@ -9,7 +9,7 @@ in
 		if(num = 2) then
 			put('O')
 		else
-			put('M')
+			
 		end
 
 	end

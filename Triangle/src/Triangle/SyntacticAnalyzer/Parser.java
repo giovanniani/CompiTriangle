@@ -512,8 +512,10 @@ public class Parser {
             case Token.ELSE:
             case Token.IN:
             case Token.EOT:
-                finish(commandPos);
-                commandAST = new EmptyCommand(commandPos);
+                    acceptIt();
+                    accept(Token.SKIP);
+                    finish(commandPos);
+                    commandAST = new EmptyCommand(commandPos);
                 break;
 
             default:
