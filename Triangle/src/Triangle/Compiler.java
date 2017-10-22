@@ -82,7 +82,7 @@ public class Compiler {
 
         // scanner.enableDebugging();
         theAST = parser.parseProgram();				// 1st pass
-        if (reporter.numErrors == 0) {
+        /*if (reporter.numErrors == 0) {
             //if (showingAST) {
             //    drawer.draw(theAST);
             //}
@@ -95,11 +95,11 @@ public class Compiler {
                 System.out.println("Code Generation ...");
                 encoder.encodeRun(theAST, showingTable);	// 3rd pass
             }
-        }
+        }*/
 
 	boolean successful = (reporter.numErrors == 0);
         if (successful) {
-            encoder.saveObjectProgram(objectName);
+            //encoder.saveObjectProgram(objectName);
             System.out.println("Compilation was successful.");
         } else {
             System.out.println("Compilation was unsuccessful.");
