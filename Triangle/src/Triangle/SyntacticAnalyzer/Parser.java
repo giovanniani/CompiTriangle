@@ -790,7 +790,7 @@ public class Parser {
         Declaration declarationAST = null; // in case there's a syntactic error
         SourcePosition declarationPos = new SourcePosition();
         start(declarationPos);
-        declarationAST = parseSingleDeclaration();
+        //declarationAST = parseSingleDeclaration();
 
         switch (currentToken.kind) {
 
