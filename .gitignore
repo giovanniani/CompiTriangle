@@ -1,7 +1,26 @@
 
-/Example-Codes/**/*.ini
-/IDE-Triangle/**/*.ini
-/Triangle/**/*.ini
+/**/*.ini
 
-/Example-Codes/build
+/Example-Codes/*.ini
+/Example-Codes/**/*.ini
+
+/Ejecutable/*.ini
+/Ejecutable/**/*.ini
+
+/IDE-Triangle/*.ini
+/IDE-Triangle/**/*.ini
 /IDE-Triangle/build
+/IDE-Triangle/build/**
+/IDE-Triangle/nbproject
+/IDE-Triangle/nbproject/**
+/IDE-Triangle/dist
+/IDE-Triangle/dist/**
+
+/Triangle/*.ini
+/Triangle/**/*.ini
+/Triangle/build
+/Triangle/build/**
+/Triangle/nbproject
+/Triangle/nbproject/**
+/Triangle/dist
+/Triangle/dist/**

@@ -52,7 +52,8 @@ public class IDECompiler {
         boolean success = false;
         
         rootAST = parser.parseProgram();
-        /*if (report.numErrors == 0) {
+/*
+        if (report.numErrors == 0) {
             System.out.println("Contextual Analysis ...");
             Checker checker = new Checker(report);
             checker.check(rootAST);
@@ -66,7 +67,8 @@ public class IDECompiler {
                     success = true;
                 }
             }
-        }*/
+        }
+*/
 
         if (success)
             System.out.println("Compilation was successful.");

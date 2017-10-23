@@ -291,7 +291,7 @@ public class Parser {
 
         SourcePosition commandPos = new SourcePosition();
         start(commandPos);
-        //System.out.println("Entra este token de single command:"+currentToken.spelling);
+
         switch (currentToken.kind) {
 
             case Token.IDENTIFIER:
@@ -326,9 +326,7 @@ public class Parser {
             case Token.LET:
             {
                 acceptIt();
-                //System.out.println("va hacer declaracion del let: ");
                 Declaration dAST = parseDeclaration();
-                 //System.out.println("hizo declaracion del let: ");
                 accept(Token.IN);
                 Command cAST = parseCommand();
                 accept(Token.END);
@@ -770,12 +768,10 @@ public class Parser {
         Declaration declarationAST = null; // in case there's a syntactic error
         SourcePosition declarationPos = new SourcePosition();
         start(declarationPos);
-        //System.out.println("va hacer primer CompoundDeclaration");
         declarationAST = parseCompoundDeclaration();
-        //System.out.println("Entra este token de declaracion1:"+currentToken.spelling);
+
         while (currentToken.kind == Token.SEMICOLON) {
             acceptIt();
-            //System.out.println("va hacer otro CompoundDeclaration");
             Declaration d2AST = parseCompoundDeclaration();
             finish(declarationPos);
             declarationAST = new SequentialDeclaration(declarationAST, d2AST, declarationPos);
@@ -794,10 +790,8 @@ public class Parser {
         Declaration declarationAST = null; // in case there's a syntactic error
         SourcePosition declarationPos = new SourcePosition();
         start(declarationPos);
-        //System.out.println("Va hacer single declaration");
-        //declarationAST = parseSingleDeclaration();
-        
-        //System.out.println("Entra este token de declaracion2:"+currentToken.spelling);
+        declarationAST = parseSingleDeclaration();
+
         switch (currentToken.kind) {
 
             case Token.RECURSIVE:
@@ -944,7 +938,7 @@ public class Parser {
 
         SourcePosition declarationPos = new SourcePosition();
         start(declarationPos);
-        //System.out.println("Token en parseSingle declaration:"+currentToken.spelling);
+
         switch (currentToken.kind) {
 
             case Token.CONST:
