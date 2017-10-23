@@ -16,7 +16,10 @@ in
 		k:= i+j;
 		i:= j;
 		j:= k;
-		num:= num - 1;
-	end
+		num:= num - 1; skip
+	end;
+
+	skip
+
 
 end

@@ -265,11 +265,10 @@ public class Parser {
      */
     Command parseCommand() throws SyntaxError {
         Command commandAST = null; // in case there's a syntactic error
-
         SourcePosition commandPos = new SourcePosition();
-
         start(commandPos);
         commandAST = parseSingleCommand();
+
         while (currentToken.kind == Token.SEMICOLON) {
             acceptIt();
             Command c2AST = parseSingleCommand();
@@ -288,7 +287,6 @@ public class Parser {
      */
     Command parseSingleCommand() throws SyntaxError {
         Command commandAST = null; // in case there's a syntactic error
-
         SourcePosition commandPos = new SourcePosition();
         start(commandPos);
 
@@ -395,7 +393,7 @@ public class Parser {
                         commandAST = new ForDoCommand(eAST1, eAST2, cAST, commandPos);
                         break;
 
-                    // "for" "var" Identifier ":=" Expression "to" Expression "while" Expression "do" Command "end".
+                    // "for" "var" Identifier ":=" Expression "to" Expression "until" Expression "do" Command "end".
                     case Token.UNTIL:
                         acceptIt();
                         eAST3 = parseExpression();
@@ -505,10 +503,10 @@ public class Parser {
             case Token.ELSE:
             case Token.IN:
             case Token.EOT:
-                    acceptIt();
-                    accept(Token.SKIP);
-                    finish(commandPos);
-                    commandAST = new EmptyCommand(commandPos);
+                acceptIt();
+                accept(Token.SKIP);
+                finish(commandPos);
+                commandAST = new EmptyCommand(commandPos);
                 break;
 
             default:
@@ -783,7 +781,6 @@ public class Parser {
         Declaration declarationAST = null; // in case there's a syntactic error
         SourcePosition declarationPos = new SourcePosition();
         start(declarationPos);
-        //declarationAST = parseSingleDeclaration();
 
         switch (currentToken.kind) {
 
@@ -828,13 +825,11 @@ public class Parser {
             break;
 
             default:
+                declarationAST = parseSingleDeclaration();
+                finish(declarationPos);
                 /**
                  * TODO: Falta el árbol sintactico. 
                  */
-                //System.out.println("Va hacer single declaration por default");
-                declarationAST = parseSingleDeclaration();
-                finish(declarationPos);
-                //declarationAST = new Declaration(declarationPos);
                 break;
 
         }
