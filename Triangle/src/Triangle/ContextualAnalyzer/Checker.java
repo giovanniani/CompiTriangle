@@ -175,11 +175,11 @@ public final class Checker implements Visitor {
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E1.position);
+      reporter.reportError("Integer expression expected here", "", ast.E1.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+      reporter.reportError("Integer expression expected here", "", ast.E2.position);
     }
 
     ast.C.visit(this, null);
@@ -199,11 +199,11 @@ public final class Checker implements Visitor {
     TypeDenoter e3Type = (TypeDenoter) ast.E3.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E1.position);
+      reporter.reportError("Integer expression expected here", "", ast.E1.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+      reporter.reportError("Integer expression expected here", "", ast.E2.position);
     }
 
     if (! e3Type.equals(StdEnvironment.booleanType)) {
@@ -227,11 +227,11 @@ public final class Checker implements Visitor {
     TypeDenoter e3Type = (TypeDenoter) ast.E3.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E1.position);
+      reporter.reportError("Integer expression expected here", "", ast.E1.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+      reporter.reportError("Integer expression expected here", "", ast.E2.position);
     }
 
     if (! e3Type.equals(StdEnvironment.booleanType)) {
