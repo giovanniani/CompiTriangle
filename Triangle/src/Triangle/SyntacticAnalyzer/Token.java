@@ -97,30 +97,30 @@ final class Token extends Object {
     OPERATOR            = 3,
 
     // Reserved words - must be in alphabetical order...
-    AND			= 4,           // EDWTORBA: Add AND token.
+    AND			= 4,           // Add AND token.
     ARRAY		= 5,
-    //BEGIN		= 6,           // EDWTORBA: DELETE BEGIN token.
+    //BEGIN		= 6,           // DELETE BEGIN token.
     CONST		= 6,
     DO			= 7,
     ELSE		= 8,
     END			= 9,
-    FOR			= 10,           // EDWTORBA: Add FOR token.
+    FOR			= 10,           // Add FOR token.
     FUNC		= 11,
     IF			= 12,
     IN			= 13,
     LET			= 14,
-    LOCAL		= 15,           // EDWTORBA: Add LOCAL token.
+    LOCAL		= 15,           // Add LOCAL token.
     OF			= 16,
-    PAR			= 17,           // EDWTORBA: Add PAR token.
+    PAR			= 17,           // Add PAR token.
     PROC		= 18,
     RECORD		= 19,
-    RECURSIVE           = 20,           // EDWTORBA: Add RECURSIVE token.
-    REPEAT		= 21,           // EDWTORBA: Add REPEAT token.
-    SKIP		= 22,           // EDWTORBA: Add SKIP token.
+    RECURSIVE           = 20,           // Add RECURSIVE token.
+    REPEAT		= 21,           // Add REPEAT token.
+    SKIP		= 22,           // Add SKIP token.
     THEN		= 23,
-    TO			= 24,           // EDWTORBA: Add TO token.
+    TO			= 24,           // Add TO token.
     TYPE		= 25,
-    UNTIL		= 26,           // EDWTORBA: Add UNITL token.
+    UNTIL		= 26,           // Add UNITL token.
     VAR			= 27,
     WHILE		= 28,
 
@@ -152,30 +152,30 @@ final class Token extends Object {
     "<char>",
     "<identifier>",
     "<operator>",
-    "and",                      // EDWTORBA: Add AND token.
+    "and",                      // Add AND token.
     "array",
-    //"begin",                  // EDWTORBA: DELETE BEGIN token.
+    //"begin",                  // DELETE BEGIN token.
     "const",
     "do",
     "else",
     "end",
-    "for",                      // EDWTORBA: Add FOR token.
+    "for",                      // Add FOR token.
     "func",
     "if",
     "in",
     "let",
-    "local",                     // EDWTORBA: Add LOCAL token.
+    "local",                     // Add LOCAL token.
     "of",
-    "par",                       // EDWTORBA: Add PAR token.
+    "par",                       // Add PAR token.
     "proc",
     "record",
-    "recursive",                  // EDWTORBA: Add RECURSIVE token.
-    "repeat",                     // EDWTORBA: Add REPEAT token.
-    "skip",                       // EDWTORBA: Add SKIP token.
+    "recursive",                  // Add RECURSIVE token.
+    "repeat",                     // Add REPEAT token.
+    "skip",                       // Add SKIP token.
     "then",
-    "to",                         // EDWTORBA: Add TO token.
+    "to",                         // Add TO token.
     "type",
-    "until",                      // EDWTORBA: Add UNTIL token.
+    "until",                      // Add UNTIL token.
     "var",
     "while",
     ".",

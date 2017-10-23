@@ -1,0 +1,11 @@
+let
+
+  var a : Integer
+
+in ! ya no está
+
+  getint (var a) ;
+  putint (a)
+
+end 
+

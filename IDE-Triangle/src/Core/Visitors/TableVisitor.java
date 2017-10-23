@@ -151,49 +151,54 @@ public class TableVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForDoCommand.
+   * Add visitForDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) { 
-      ast.E.visit(this, null);
+      ast.E1.visit(this, null);
+      ast.E2.visit(this, null);
       ast.C.visit(this, null);
       
       return(null);
   }
 
   /**
-   * EDWTORBA: Add visitForWhileDoCommand.
+   * Add visitForWhileDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) { 
-      ast.E.visit(this, null);
+      ast.E1.visit(this, null);
+      ast.E2.visit(this, null);
+      ast.E3.visit(this, null);
       ast.C.visit(this, null);
       
       return(null);
   }
 
   /**
-   * EDWTORBA: Add visitForUntilDoCommand.
+   * Add visitForUntilDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) { 
-      ast.E.visit(this, null);
+      ast.E1.visit(this, null);
+      ast.E2.visit(this, null);
+      ast.E3.visit(this, null);
       ast.C.visit(this, null);
       
       return(null);
   }
 
   /**
-   * EDWTORBA: Add visitDoRepeatUntilCommand.
+   * Add visitDoRepeatUntilCommand.
    * 
    * @param ast
    * @param o
@@ -207,7 +212,7 @@ public class TableVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatDoWhileCommand.
+   * Add visitRepeatDoWhileCommand.
    * 
    * @param ast
    * @param o
@@ -221,7 +226,7 @@ public class TableVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatUntilCommand.
+   * Add visitRepeatUntilCommand.
    * 
    * @param ast
    * @param o
@@ -235,7 +240,7 @@ public class TableVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatWhileCommand.
+   * Add visitRepeatWhileCommand.
    * 
    * @param ast
    * @param o
@@ -418,7 +423,7 @@ public class TableVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForVarDeclaration.
+   * Add visitForVarDeclaration.
    * 
    * @param ast
    * @param o
@@ -452,7 +457,7 @@ public class TableVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitVarDeclarationInitialization.
+   * Add visitVarDeclarationInitialization.
    * 
    * @param ast
    * @param o

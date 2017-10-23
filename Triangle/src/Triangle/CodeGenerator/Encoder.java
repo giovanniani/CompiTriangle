@@ -168,70 +168,40 @@ public final class Encoder implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForDoCommand.
+   * Add visitForDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) {
-    Frame frame = (Frame) o;
-    int jumpAddr, loopAddr;
-
-    jumpAddr = nextInstrAddr;
-    emit(Machine.JUMPop, 0, Machine.CBr, 0);
-    loopAddr = nextInstrAddr;
-    ast.C.visit(this, frame);
-    patch(jumpAddr, nextInstrAddr);
-    ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
     return null;
   }
 
   /**
-   * EDWTORBA: Add visitForWhileDoCommand.
+   * Add visitForWhileDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) {
-    Frame frame = (Frame) o;
-    int jumpAddr, loopAddr;
-
-    jumpAddr = nextInstrAddr;
-    emit(Machine.JUMPop, 0, Machine.CBr, 0);
-    loopAddr = nextInstrAddr;
-    ast.C.visit(this, frame);
-    patch(jumpAddr, nextInstrAddr);
-    ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
     return null;
   }
 
   /**
-   * EDWTORBA: Add visitForUntilDoCommand.
+   * Add visitForUntilDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) {
-    Frame frame = (Frame) o;
-    int jumpAddr, loopAddr;
-
-    jumpAddr = nextInstrAddr;
-    emit(Machine.JUMPop, 0, Machine.CBr, 0);
-    loopAddr = nextInstrAddr;
-    ast.C.visit(this, frame);
-    patch(jumpAddr, nextInstrAddr);
-    ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
     return null;
   }
 
   /**
-   * EDWTORBA: Add visitRepeatDoUntilCommand.
+   * Add visitRepeatDoUntilCommand.
    * 
    * @param ast
    * @param o
@@ -252,7 +222,7 @@ public final class Encoder implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatWhileCommand.
+   * Add visitRepeatWhileCommand.
    * 
    * @param ast
    * @param o
@@ -273,7 +243,7 @@ public final class Encoder implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatUntilCommand.
+   * Add visitRepeatUntilCommand.
    * 
    * @param ast
    * @param o
@@ -294,7 +264,7 @@ public final class Encoder implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatWhileCommand.
+   * Add visitRepeatWhileCommand.
    * 
    * @param ast
    * @param o
@@ -511,7 +481,7 @@ public final class Encoder implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForVarDeclaration.
+   * Add visitForVarDeclaration.
    * 
    * @param ast
    * @param o
@@ -539,7 +509,7 @@ public final class Encoder implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitVarDeclarationInitialization.
+   * Add visitVarDeclarationInitialization.
    * 
    * @param ast
    * @param o

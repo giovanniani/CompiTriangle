@@ -52,6 +52,9 @@ public class IDECompiler {
         boolean success = false;
         
         rootAST = parser.parseProgram();
+
+        // The execution is modified so that only the lexical and syntactic analysis is make.
+        success = true;
 /*
         if (report.numErrors == 0) {
             System.out.println("Contextual Analysis ...");

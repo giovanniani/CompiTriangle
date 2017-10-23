@@ -25,7 +25,7 @@ public interface Visitor {
   public abstract Object visitSequentialCommand(SequentialCommand ast, Object o);
   public abstract Object visitWhileCommand(WhileCommand ast, Object o);
 
-  // EDWTORBA: Add new commands.
+  // Add new commands.
   public abstract Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o);
   public abstract Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o);
   public abstract Object visitRepeatUntilCommand(RepeatUntilCommand ast, Object o);
@@ -57,7 +57,7 @@ public interface Visitor {
   public abstract Object visitUnaryOperatorDeclaration(UnaryOperatorDeclaration ast, Object o);
   public abstract Object visitVarDeclaration(VarDeclaration ast, Object o);
 
-  // EDWTORBA: Add new commands.
+  // Add new commands.
   public abstract Object visitForVarDeclaration(ForVarDeclaration ast, Object o);
   public abstract Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o);
 

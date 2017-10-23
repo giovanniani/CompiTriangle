@@ -131,40 +131,40 @@ public class LayoutVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForDoCommand.
+   * Add visitForDoCommand.
    * 
    * @param ast
    * @param obj
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object obj) {
-    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
+    return layoutTernary("ForDoCom.", ast.E1, ast.E2, ast.C);
   }
 
   /**
-   * EDWTORBA: Add visitForWhileDoCommand.
-   * 
-   * @param ast
-   * @param obj
-   * @return 
-   */
-  public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
-    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
-  }
-
-  /**
-   * EDWTORBA: Add visitForWhileDoCommand.
+   * Add visitForWhileDoCommand.
    * 
    * @param ast
    * @param obj
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object obj) {
-    return layoutBinary("RepeatDoUntilCom.", ast.E, ast.C);
+    return layoutQuaternary("ForDoUntilCom.", ast.E1, ast.E2, ast.E3, ast.C);
   }
 
   /**
-   * EDWTORBA: Add visitRepeatDoUntilCommand.
+   * Add visitForWhileDoCommand.
+   * 
+   * @param ast
+   * @param obj
+   * @return 
+   */
+  public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
+    return layoutQuaternary("ForDoWhileCom.", ast.E1, ast.E2, ast.E3, ast.C);
+  }
+
+  /**
+   * Add visitRepeatDoUntilCommand.
    * 
    * @param ast
    * @param obj
@@ -175,7 +175,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatDoWhileCommand.
+   * Add visitRepeatDoWhileCommand.
    * 
    * @param ast
    * @param obj
@@ -186,7 +186,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatUntilCommand.
+   * Add visitRepeatUntilCommand.
    * 
    * @param ast
    * @param obj
@@ -197,7 +197,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatWhileCommand.
+   * Add visitRepeatWhileCommand.
    * 
    * @param ast
    * @param obj

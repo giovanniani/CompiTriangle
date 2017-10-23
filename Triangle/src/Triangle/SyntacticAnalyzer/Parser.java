@@ -313,7 +313,7 @@ public class Parser {
             }
             break;
 
-            // EDWTORBA: Delete BEGIN command.
+            // Delete BEGIN command.
             /*
             case Token.BEGIN:
                 acceptIt();
@@ -350,7 +350,7 @@ public class Parser {
             }
             break;
 
-            // EDWTORBA: Delete "while" token.
+            // Delete "while" token.
             /*
             case Token.WHILE:
               {
@@ -364,10 +364,7 @@ public class Parser {
               break;
             */
 
-            /**
-             * GEOVANNI: Add new commands.
-             */
-
+            // Add Skip command.
             case Token.SKIP:
                 acceptIt();
                 commandAST= new EmptyCommand(commandPos);
@@ -389,15 +386,16 @@ public class Parser {
 
                 switch (currentToken.kind) {
 
+                    // "for" "var" Identifier ":=" Expression "to" Expression "do" Command "end".
                     case Token.DO:
                         acceptIt();
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        // TODO CREAR ARBOL SINTÁCTICO PARA FOR DO.
-                        commandAST = new ForDoCommand(eAST1, cAST, commandPos);
+                        commandAST = new ForDoCommand(eAST1, eAST2, cAST, commandPos);
                         break;
 
+                    // "for" "var" Identifier ":=" Expression "to" Expression "while" Expression "do" Command "end".
                     case Token.UNTIL:
                         acceptIt();
                         eAST3 = parseExpression();
@@ -405,10 +403,10 @@ public class Parser {
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        // TODO CREAR ARBOL SINTÁCTICO PARA FOR UNTIL DO.
-                        commandAST = new ForUntilDoCommand(eAST1, cAST, commandPos);
+                        commandAST = new ForUntilDoCommand(eAST1, eAST2, eAST3, cAST, commandPos);
                         break;
 
+                    // "for" "var" Identifier ":=" Expression "to" Expression "while" Expression "do" Command "end".
                     case Token.WHILE:
                         acceptIt();
                         eAST3 = parseExpression();
@@ -416,8 +414,7 @@ public class Parser {
                         cAST = parseCommand();
                          accept(Token.END);
                         finish(commandPos);
-                        // TODO CREAR ARBOL SINTÁCTICO PARA FOR WHILE DO.
-                        commandAST = new ForWhileDoCommand(eAST1, cAST, commandPos);
+                        commandAST = new ForWhileDoCommand(eAST1, eAST2, eAST3, cAST, commandPos);
                         break;
 
                     default:
@@ -447,8 +444,8 @@ public class Parser {
 
                         switch(currentToken.kind) {
 
+                            // "repeat" "do" Command "until" Expression "end".
                             case Token.UNTIL:
-                                // "repeat" "do" Command "until" Expression "end".
                                 acceptIt();
                                 eAST = parseExpression();
                                 accept(Token.END);
@@ -456,8 +453,8 @@ public class Parser {
                                 commandAST = new RepeatDoUntilCommand(eAST, cAST, commandPos);
                                 break;
 
+                            // "repeat" "do" Command "while" Expression "end".
                             case Token.WHILE:
-                                // "repeat" "do" Command "while" Expression "end".
                                 acceptIt();
                                 eAST = parseExpression();
                                 accept(Token.END);
@@ -475,7 +472,6 @@ public class Parser {
 
                     // "repeat" "until" Expression "do" Command "end".
                     case Token.UNTIL:
-
                         acceptIt();
                         eAST = parseExpression();
                         accept(Token.DO);
@@ -483,12 +479,10 @@ public class Parser {
                         accept(Token.END);
                         finish(commandPos);
                         commandAST = new RepeatUntilCommand(eAST, cAST, commandPos);
-
                         break;
 
                     // "repeat" "while" Expression "do" Command "end".
                     case Token.WHILE:
-
                         acceptIt();
                         eAST = parseExpression();
                         accept(Token.DO);
@@ -496,7 +490,6 @@ public class Parser {
                         accept(Token.END);
                         finish(commandPos);
                         commandAST = new RepeatWhileCommand(eAST, cAST, commandPos);
-
                         break;
 
                     default:

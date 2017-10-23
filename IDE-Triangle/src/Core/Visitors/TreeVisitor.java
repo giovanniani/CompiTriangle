@@ -126,40 +126,40 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * EDWTORBA: Add visitForDoCommand.
+     * Add visitForDoCommand.
      * 
      * @param ast
      * @param obj
      * @return 
      */
     public Object visitForDoCommand(ForDoCommand ast, Object obj) {
-        return(createBinary("For Do Command", ast.E, ast.C));
+        return(createTernary("For Do Command", ast.E1, ast.E2, ast.C));
     }
 
     /**
-     * EDWTORBA: Add visitForWhileDoCommand.
-     * 
-     * @param ast
-     * @param obj
-     * @return 
-     */
-    public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
-        return(createBinary("For Do Command", ast.E, ast.C));
-    }
-
-    /**
-     * EDWTORBA: Add visitForUntilDoCommand.
+     * Add visitForUntilDoCommand.
      * 
      * @param ast
      * @param obj
      * @return 
      */
     public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object obj) {
-        return(createBinary("For Do Command", ast.E, ast.C));
+        return(createQuaternary("For Until Do Command", ast.E1, ast.E2, ast.E3, ast.C));
     }
 
     /**
-     * EDWTORBA: Add visitRepeatDoUntilCommand.
+     * Add visitForWhileDoCommand.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
+        return(createQuaternary("For While Do Command", ast.E1, ast.E2, ast.E3, ast.C));
+    }
+
+    /**
+     * Add visitRepeatDoUntilCommand.
      * 
      * @param ast
      * @param obj
@@ -170,7 +170,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * EDWTORBA: Add visitRepeatDoWhileCommand.
+     * Add visitRepeatDoWhileCommand.
      * 
      * @param ast
      * @param obj
@@ -181,7 +181,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * EDWTORBA: Add visitRepeatUntilCommand.
+     * Add visitRepeatUntilCommand.
      * 
      * @param ast
      * @param obj
@@ -192,7 +192,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * EDWTORBA: Add visitRepeatWhileCommand.
+     * Add visitRepeatWhileCommand.
      * 
      * @param ast
      * @param obj
@@ -286,7 +286,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * EDWTORBA: Add ForVarDeclaration.
+     * Add ForVarDeclaration.
      * 
      * @param ast
      * @param obj
@@ -297,7 +297,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * EDWTORBA: Add VarDeclarationInitialization.
+     * Add VarDeclarationInitialization.
      * 
      * @param ast
      * @param obj

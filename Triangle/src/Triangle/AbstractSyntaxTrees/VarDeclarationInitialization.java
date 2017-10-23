@@ -16,8 +16,12 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class VarDeclarationInitialization extends Declaration {
 
+  public Identifier I;
+  public Expression E;
+
   public VarDeclarationInitialization (Identifier iAST, Expression eAST, SourcePosition thePosition) {
     super (thePosition);
+
     I = iAST;
     E = eAST;
   }
@@ -26,6 +30,4 @@ public class VarDeclarationInitialization extends Declaration {
     return v.visitVarDeclarationInitialization(this, o);
   }
 
-  public Identifier I;
-  public Expression E;
 }

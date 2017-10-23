@@ -164,17 +164,22 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForDoCommand.
+   * Add visitForDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) {
-    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
+    TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
-    if (! eType.equals(StdEnvironment.booleanType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    if (! e1Type.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E1.position);
+    }
+
+    if (! e2Type.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
     }
 
     ast.C.visit(this, null);
@@ -182,17 +187,27 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForUntilDoCommand.
+   * Add visitForUntilDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) {
-    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
+    TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
+    TypeDenoter e3Type = (TypeDenoter) ast.E3.visit(this, null);
 
-    if (! eType.equals(StdEnvironment.booleanType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    if (! e1Type.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E1.position);
+    }
+
+    if (! e2Type.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+    }
+
+    if (! e3Type.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E3.position);
     }
 
     ast.C.visit(this, null);
@@ -200,17 +215,27 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitForWhileDoCommand.
+   * Add visitForWhileDoCommand.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) {
-    TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
+    TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
+    TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
+    TypeDenoter e3Type = (TypeDenoter) ast.E3.visit(this, null);
 
-    if (! eType.equals(StdEnvironment.booleanType)) {
-      reporter.reportError("Boolean expression expected here", "", ast.E.position);
+    if (! e1Type.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E1.position);
+    }
+
+    if (! e2Type.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E2.position);
+    }
+
+    if (! e3Type.equals(StdEnvironment.booleanType)) {
+      reporter.reportError("Boolean expression expected here", "", ast.E3.position);
     }
 
     ast.C.visit(this, null);
@@ -218,7 +243,7 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatDoUntilCommand.
+   * Add visitRepeatDoUntilCommand.
    * 
    * @param ast
    * @param o
@@ -236,7 +261,7 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatDoWhileCommand.
+   * Add visitRepeatDoWhileCommand.
    * 
    * @param ast
    * @param o
@@ -251,7 +276,7 @@ public final class Checker implements Visitor {
   }
   
   /**
-   * EDWTORBA: Add visitRepeatUntilCommand.
+   * Add visitRepeatUntilCommand.
    * 
    * @param ast
    * @param o
@@ -269,7 +294,7 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add visitRepeatWhileCommand.
+   * Add visitRepeatWhileCommand.
    * 
    * @param ast
    * @param o
@@ -483,7 +508,7 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add ForVarDeclaration.
+   * Add ForVarDeclaration.
    * 
    * @param ast
    * @param o
@@ -501,7 +526,7 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * EDWTORBA: Add VarDeclarationInitialization.
+   * Add VarDeclarationInitialization.
    * 
    * @param ast
    * @param o
@@ -881,11 +906,11 @@ public final class Checker implements Visitor {
         ast.type = ((VarFormalParameter) binding).T;
         ast.variable = true;
       } else if (binding instanceof ForVarDeclaration) {
-        // EDWTORBA: Add ForVarDeclaration.
+        // Add ForVarDeclaration.
         ast.type = ((ForVarDeclaration) binding).E.type;
         ast.variable = false;
       } else if (binding instanceof VarDeclarationInitialization) {
-        // EDWTORBA: Add ForVarDeclaration.
+        // Add ForVarDeclaration.
         ast.type = ((VarDeclarationInitialization) binding).E.type;
         ast.variable = true;
       } else {
