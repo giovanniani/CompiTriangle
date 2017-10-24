@@ -60,6 +60,9 @@ public interface Visitor {
   // Add new commands.
   public abstract Object visitForVarDeclaration(ForVarDeclaration ast, Object o);
   public abstract Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o);
+  public abstract Object visitLocalDeclaration(LocalDeclaration ast, Object o);
+  public abstract Object visitParDeclaration(ParDeclaration ast, Object o);
+  public abstract Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o);
 
   // Array Aggregates
   public abstract Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o);

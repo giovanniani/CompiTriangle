@@ -67,8 +67,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.ParDeclaration;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
@@ -487,6 +490,47 @@ public class TableVisitor implements Visitor {
       ast.E.visit(this, null);
       ast.I.visit(this, null);
 
+      return(null);
+  }
+
+  /**
+   * Add visitLocalDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {   
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+      
+      return(null);
+  }
+
+  /**
+   * Add visitParDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitParDeclaration(ParDeclaration ast, Object o) {   
+      ast.D1.visit(this, null);
+      ast.D2.visit(this, null);
+      
+      return(null);
+  }
+
+  /**
+   * Add visitRecursiveDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {   
+      ast.D.visit(this, null);
+      
       return(null);
   }
 

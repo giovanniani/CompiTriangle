@@ -80,8 +80,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.ParDeclaration;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
@@ -410,13 +413,13 @@ public class Parser {
                         eAST3 = parseExpression();
                         accept(Token.DO);
                         cAST = parseCommand();
-                         accept(Token.END);
+                        accept(Token.END);
                         finish(commandPos);
                         commandAST = new ForWhileDoCommand(eAST1, eAST2, eAST3, cAST, commandPos);
                         break;
 
                     default:
-                        syntacticError("\"%\" Unexpected token. 'Do', 'While' or 'Until' was expected.", currentToken.spelling);
+                        syntacticError("\"%\" Unexpected token. 'do', 'until' or 'while' was expected.", currentToken.spelling);
                         break;
 
                 }
@@ -461,7 +464,7 @@ public class Parser {
                                 break;
 
                             default:
-                                syntacticError("\"%\" Unexpected token. 'While' or 'Until' was expected.", currentToken.spelling);
+                                syntacticError("\"%\" Unexpected token. 'until' or 'while' was expected.", currentToken.spelling);
                                 break;
 
                         }
@@ -491,7 +494,7 @@ public class Parser {
                         break;
 
                     default:
-                        syntacticError("\"%\" Unexpected token. 'Do' or 'While' was expected.", currentToken.spelling);
+                        syntacticError("\"%\" Unexpected token. 'do', 'until' or 'while' was expected.", currentToken.spelling);
                         break;
                 }
 
@@ -790,46 +793,41 @@ public class Parser {
                 Declaration d2AST = parseProcFuncsDeclaration();
                 accept(Token.END);
                 finish(declarationPos);
-                declarationAST = new SequentialDeclaration(declarationAST, d2AST, declarationPos);
+                declarationAST = new RecursiveDeclaration(d2AST, declarationPos);
             }
             break;
 
             case Token.LOCAL:
             {
                 acceptIt();
-                Declaration d2AST = parseDeclaration();
+                Declaration d1AST = parseDeclaration();
                 accept(Token.IN);
-                Declaration d3AST = parseDeclaration();
+                Declaration d2AST = parseDeclaration();
                 accept(Token.END);
                 finish(declarationPos);
-                /**
-                 * TODO: Hay q hacer el arbol sintactico para esta declaración.
-                 */
+                declarationAST = new LocalDeclaration(d1AST, d2AST, declarationPos);
             }
             break;
 
             case Token.PAR:
             {
                 acceptIt();
-                Declaration d2AST = parseSingleDeclaration();
-                accept(Token.LPAREN);
-                accept(Token.AND);
-                Declaration d3AST = parseSingleDeclaration();
-                accept(Token.RPAREN);
+                declarationAST = parseSingleDeclaration();
+
+                while (currentToken.kind == Token.AND) {
+                    acceptIt();
+                    Declaration d2AST = parseCompoundDeclaration();
+                    finish(declarationPos);
+                    declarationAST = new ParDeclaration(declarationAST, d2AST, declarationPos);
+                }
+
                 accept(Token.END);
-                finish(declarationPos);
-                /**
-                 * TODO: Hay q hacer el arbol sintactico para esta declaración.
-                 */
             }
             break;
 
             default:
                 declarationAST = parseSingleDeclaration();
                 finish(declarationPos);
-                /**
-                 * TODO: Falta el árbol sintactico. 
-                 */
                 break;
 
         }
@@ -947,6 +945,7 @@ public class Parser {
                 Identifier iAST = parseIdentifier();
                 switch (currentToken.kind) {
 
+                    // var Id := Type
                     case Token.COLON:
                         acceptIt();
                         TypeDenoter tAST = parseTypeDenoter();
@@ -954,6 +953,7 @@ public class Parser {
                         declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
                         break;
 
+                    // var Id := Exp
                     case Token.BECOMES:
                         acceptIt();
                         Expression eAST = parseExpression();
@@ -966,22 +966,7 @@ public class Parser {
                         break;
 
                 }
-        /*
-                acceptIt();
-                Identifier iAST = parseIdentifier();
-                accept(Token.COLON);
-                TypeDenoter tAST = parseTypeDenoter();
-                finish(declarationPos);
-                declarationAST = new VarDeclaration(iAST, tAST, declarationPos);
 
-                if (currentToken.kind == Token.BECOMES) {
-                    acceptIt();
-                    Vname vAST = parseRestOfVname(iAST);
-                    Expression eAST = parseExpression();
-                    finish(declarationPos);
-                    commandAST = new AssignCommand(vAST, eAST, declarationPos);
-                }
-        */
             }
             break;
 
@@ -1012,8 +997,7 @@ public class Parser {
                 accept(Token.IS);
                 Expression eAST = parseExpression();
                 finish(declarationPos);
-                declarationAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST,
-                  declarationPos);
+                declarationAST = new FuncDeclaration(iAST, fpsAST, tAST, eAST, declarationPos);
             }
             break;
 

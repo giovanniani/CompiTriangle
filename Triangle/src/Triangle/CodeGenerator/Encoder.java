@@ -88,8 +88,11 @@ import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.Vname;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.ParDeclaration;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
@@ -536,6 +539,38 @@ public final class Encoder implements Visitor {
     return new Integer(extraSize);
   }
 
+  /**
+   * Add visitLocalDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+    return null;
+  }
+
+  /**
+   * Add visitParDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitParDeclaration(ParDeclaration ast, Object o) {
+    return null;
+  }
+
+  /**
+   * Add visitRecursiveDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+    return null;
+  }
 
 
   // Array Aggregates

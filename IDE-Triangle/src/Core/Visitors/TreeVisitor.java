@@ -67,8 +67,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.ParDeclaration;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
@@ -286,7 +289,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * Add ForVarDeclaration.
+     * Add visitForVarDeclaration.
      * 
      * @param ast
      * @param obj
@@ -297,7 +300,7 @@ public class TreeVisitor implements Visitor {
     }
 
     /**
-     * Add VarDeclarationInitialization.
+     * Add visitVarDeclarationInitialization.
      * 
      * @param ast
      * @param obj
@@ -306,6 +309,40 @@ public class TreeVisitor implements Visitor {
     public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object obj) {
         return(createBinary("Variable Declaration Initialization", ast.I, ast.E));
     }
+
+    /**
+     * Add visitLocalDeclaration.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitLocalDeclaration(LocalDeclaration ast, Object obj) {
+        return(createBinary("Local Declaration", ast.D1, ast.D2));
+    }
+
+    /**
+     * Add visitParDeclaration.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitParDeclaration(ParDeclaration ast, Object obj) {
+        return(createBinary("Par Declaration", ast.D1, ast.D2));
+    }
+
+    /**
+     * Add visitRecursiveDeclaration.
+     * 
+     * @param ast
+     * @param obj
+     * @return 
+     */
+    public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object obj) {
+        return(createUnary("Recursive Declaration", ast.D));
+    }
+
 
     // </editor-fold>
     

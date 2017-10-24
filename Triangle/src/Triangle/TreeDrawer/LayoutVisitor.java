@@ -79,8 +79,11 @@ import Triangle.AbstractSyntaxTrees.VarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarFormalParameter;
 import Triangle.AbstractSyntaxTrees.Visitor;
 import Triangle.AbstractSyntaxTrees.VnameExpression;
-import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.VarDeclarationInitialization;
+import Triangle.AbstractSyntaxTrees.LocalDeclaration;
+import Triangle.AbstractSyntaxTrees.ParDeclaration;
+import Triangle.AbstractSyntaxTrees.RecursiveDeclaration;
+import Triangle.AbstractSyntaxTrees.ForVarDeclaration;
 import Triangle.AbstractSyntaxTrees.ForDoCommand;
 import Triangle.AbstractSyntaxTrees.ForUntilDoCommand;
 import Triangle.AbstractSyntaxTrees.ForWhileDoCommand;
@@ -286,12 +289,26 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("VarDecl.", ast.I, ast.T);
   }
 
+  // Add new Declarations.
+
   public Object visitForVarDeclaration(ForVarDeclaration ast, Object obj) {
     return layoutBinary("ForVarDecl.", ast.I, ast.E);
   }
 
   public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object obj) {
     return layoutBinary("VarDeclInit.", ast.I, ast.E);
+  }
+
+  public Object visitLocalDeclaration(LocalDeclaration ast, Object obj) {
+    return layoutBinary("LocalDecl.", ast.D1, ast.D2);
+  }
+
+  public Object visitParDeclaration(ParDeclaration ast, Object obj) {
+    return layoutBinary("ParDecl.", ast.D1, ast.D2);
+  }
+
+  public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object obj) {
+    return layoutUnary("RecursiveDecl.", ast.D);
   }
 
 
