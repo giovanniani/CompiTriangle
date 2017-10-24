@@ -1,0 +1,10 @@
+let
+	const c ~ 3;
+	par const v ~ 3 (and var f := v+4)end;
+	par const v ~ 3 (and var f := v+4)end;
+	par const v ~ 3 (and var f := v+4)end
+
+	
+in 
+	skip
+end

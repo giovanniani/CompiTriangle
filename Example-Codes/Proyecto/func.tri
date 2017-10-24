@@ -1,0 +1,11 @@
+let
+	const c ~ 3;
+	recursive 
+		func funcion(var a: Integer)  : Integer ~ a+c
+	end;
+	recursive 
+		func funcion(var a: Integer)  : Integer ~ a+c
+	end
+in 
+	skip
+end

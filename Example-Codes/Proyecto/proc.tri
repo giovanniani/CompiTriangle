@@ -1,0 +1,9 @@
+let
+	const c ~2;
+	recursive 
+		proc proecedimiento(var a: Integer) ~ a := c+2 end
+	end;
+	var e := 3 
+in 
+	skip
+end
