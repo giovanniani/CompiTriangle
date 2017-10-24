@@ -2,7 +2,7 @@ let
 
   var a : Integer
 
-in ! ya no estÃ¡
+in begin ! ya no está
 
   getint (var a) ;
   putint (a)
