@@ -1,14 +1,14 @@
 let
-	var num := 2
-	!var num: Integer
+	!const test ~ 2
+	!var num := 3
+	var num: Integer
 in
 
-	num := 2;
+	num := true;
 
-	repeat do
-		num := num +1;
-		put('O')
-	while (num < 5)
+	repeat while (num < 5) do
+		putint(num);
+		num := num +1
 	end
 
 
