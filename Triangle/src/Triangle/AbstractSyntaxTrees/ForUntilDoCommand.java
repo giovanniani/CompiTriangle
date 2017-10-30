@@ -16,13 +16,14 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class ForUntilDoCommand extends Command {
 
-  public Expression E1, E2, E3;
+  public ForVarDeclaration V;
+  public Expression E2, E3;
   public Command C;
 
-  public ForUntilDoCommand (Expression e1AST, Expression e2AST, Expression e3AST, Command cAST, SourcePosition thePosition) {
+  public ForUntilDoCommand (ForVarDeclaration vAST, Expression e2AST, Expression e3AST, Command cAST, SourcePosition thePosition) {
     super (thePosition);
 
-    E1 = e1AST;
+    V = vAST;
     E2 = e2AST;
     E3 = e3AST;
     C = cAST;

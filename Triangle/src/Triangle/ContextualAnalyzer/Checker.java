@@ -174,18 +174,19 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) {
-    TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
-    TypeDenoter e2Type = (TypeDenoter) ast.F1.E.visit(this, null);
+    TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
+    TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.E1.position);
+      reporter.reportError("Integer expression expected here", "", ast.V.E.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.F1.E.position);
+      reporter.reportError("Integer expression expected here", "", ast.E2.position);
     }
+
     idTable.openScope();
-    ast.F1.visit(this, null);
+    ast.V.visit(this, null);
     ast.C.visit(this, null);
     idTable.closeScope();
     return null;
@@ -199,12 +200,12 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) {
-    TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
+    TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
     TypeDenoter e3Type = (TypeDenoter) ast.E3.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.E1.position);
+      reporter.reportError("Integer expression expected here", "", ast.V.E.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
@@ -215,7 +216,10 @@ public final class Checker implements Visitor {
       reporter.reportError("Boolean expression expected here", "", ast.E3.position);
     }
 
+    idTable.openScope();
+    ast.V.visit(this, null);
     ast.C.visit(this, null);
+    idTable.closeScope();
     return null;
   }
 
@@ -227,12 +231,12 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) {
-    TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
+    TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
     TypeDenoter e3Type = (TypeDenoter) ast.E3.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.E1.position);
+      reporter.reportError("Integer expression expected here", "", ast.V.E.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
@@ -243,7 +247,10 @@ public final class Checker implements Visitor {
       reporter.reportError("Boolean expression expected here", "", ast.E3.position);
     }
 
+    idTable.openScope();
+    ast.V.visit(this, null);
     ast.C.visit(this, null);
+    idTable.closeScope();
     return null;
   }
 

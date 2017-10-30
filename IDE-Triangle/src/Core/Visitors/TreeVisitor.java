@@ -136,7 +136,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitForDoCommand(ForDoCommand ast, Object obj) {
-        return(createTernary("For Do Command", ast.E1, ast.E2, ast.C));
+        return(createTernary("For Do Command", ast.V, ast.E2, ast.C));
     }
 
     /**
@@ -147,7 +147,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object obj) {
-        return(createQuaternary("For Until Do Command", ast.E1, ast.E2, ast.E3, ast.C));
+        return(createQuaternary("For Until Do Command", ast.V, ast.E2, ast.E3, ast.C));
     }
 
     /**
@@ -158,7 +158,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
-        return(createQuaternary("For While Do Command", ast.E1, ast.E2, ast.E3, ast.C));
+        return(createQuaternary("For While Do Command", ast.V, ast.E2, ast.E3, ast.C));
     }
 
     /**

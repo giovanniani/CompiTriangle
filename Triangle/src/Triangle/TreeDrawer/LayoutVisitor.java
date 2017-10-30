@@ -141,7 +141,7 @@ public class LayoutVisitor implements Visitor {
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object obj) {
-    return layoutTernary("ForDoCom.", ast.F1, ast.E1, ast.C);
+    return layoutTernary("ForDoCom.", ast.V, ast.E2, ast.C);
   }
 
   /**
@@ -152,7 +152,7 @@ public class LayoutVisitor implements Visitor {
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object obj) {
-    return layoutQuaternary("ForDoUntilCom.", ast.E1, ast.E2, ast.E3, ast.C);
+    return layoutQuaternary("ForDoUntilCom.", ast.V, ast.E2, ast.E3, ast.C);
   }
 
   /**
@@ -163,7 +163,7 @@ public class LayoutVisitor implements Visitor {
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object obj) {
-    return layoutQuaternary("ForDoWhileCom.", ast.E1, ast.E2, ast.E3, ast.C);
+    return layoutQuaternary("ForDoWhileCom.", ast.V, ast.E2, ast.E3, ast.C);
   }
 
   /**

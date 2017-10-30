@@ -161,7 +161,7 @@ public class TableVisitor implements Visitor {
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) { 
-      ast.E1.visit(this, null);
+      ast.V.visit(this, null);
       ast.E2.visit(this, null);
       ast.C.visit(this, null);
       
@@ -176,7 +176,7 @@ public class TableVisitor implements Visitor {
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) { 
-      ast.E1.visit(this, null);
+      ast.V.visit(this, null);
       ast.E2.visit(this, null);
       ast.E3.visit(this, null);
       ast.C.visit(this, null);
@@ -192,7 +192,7 @@ public class TableVisitor implements Visitor {
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) { 
-      ast.E1.visit(this, null);
+      ast.V.visit(this, null);
       ast.E2.visit(this, null);
       ast.E3.visit(this, null);
       ast.C.visit(this, null);
@@ -356,7 +356,7 @@ public class TableVisitor implements Visitor {
           }
           addIdentifier(name, type, size, level, displacement, value);
       } catch (NullPointerException e) { }
-      
+
       ast.E.visit(this, null);
       ast.I.visit(this, null);
 
@@ -486,7 +486,7 @@ public class TableVisitor implements Visitor {
           }
           addIdentifier(name, type, size, level, displacement, value);
       } catch (NullPointerException e) { }
-      
+
       ast.E.visit(this, null);
       ast.I.visit(this, null);
 
