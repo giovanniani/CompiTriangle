@@ -175,17 +175,17 @@ public final class Checker implements Visitor {
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) {
     TypeDenoter e1Type = (TypeDenoter) ast.E1.visit(this, null);
-    TypeDenoter e2Type = (TypeDenoter) ast.V1.E.visit(this, null);
+    TypeDenoter e2Type = (TypeDenoter) ast.F1.E.visit(this, null);
 
     if (! e1Type.equals(StdEnvironment.integerType)) {
       reporter.reportError("Integer expression expected here", "", ast.E1.position);
     }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.V1.E.position);
+      reporter.reportError("Integer expression expected here", "", ast.F1.E.position);
     }
     idTable.openScope();
-    ast.V1.visit(this, null);
+    ast.F1.visit(this, null);
     ast.C.visit(this, null);
     idTable.closeScope();
     return null;

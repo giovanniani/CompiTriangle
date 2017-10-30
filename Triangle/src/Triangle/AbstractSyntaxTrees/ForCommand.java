@@ -9,11 +9,10 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class ForCommand extends Command {
 
-  public ForCommand (Identifier iAST, Expression eAST,Expression eAST2, Command cAST, SourcePosition thePosition) {
+  public ForCommand (VarDeclarationInitialization vAST,Expression eAST1, Command cAST, SourcePosition thePosition) {
     super (thePosition);
-    I = iAST;
-    E = eAST;
-    E2 = eAST2;
+    V1 = vAST;
+    E1 = eAST1;
     C = cAST;
   }
 
@@ -21,9 +20,7 @@ public class ForCommand extends Command {
     //return v.visitForCommand(this, o);
     return null;
   }
-
-  public Identifier I;
-  public Expression E;
-  public Expression E2;
+  public VarDeclarationInitialization V1;
+  public Expression E1;
   public Command C;
 }

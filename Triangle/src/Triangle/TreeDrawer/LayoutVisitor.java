@@ -141,7 +141,7 @@ public class LayoutVisitor implements Visitor {
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object obj) {
-    return layoutTernary("ForDoCom.", ast.V1, ast.E1, ast.C);
+    return layoutTernary("ForDoCom.", ast.F1, ast.E1, ast.C);
   }
 
   /**

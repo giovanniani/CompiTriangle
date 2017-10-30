@@ -4,8 +4,7 @@ let
 	var num: Integer
 in
 
-	for var test := true to 5 do
-		test := test + 1;
+	for var test := 1 to 5 do
 		put('M')
 	end
 end
