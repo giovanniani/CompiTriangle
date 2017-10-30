@@ -1,8 +1,7 @@
 let
-	var num: Integer
+	var num := 1
+	
 in
-
-	num := 1;
 
 	repeat do
 

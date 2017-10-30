@@ -15,14 +15,14 @@ package Triangle.AbstractSyntaxTrees;
 import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class ForDoCommand extends Command {
-
-  public Expression E1, E2;
+  public VarDeclarationInitialization V1;
+  public Expression E1;
   public Command C;
 
-  public ForDoCommand (Expression e1AST, Expression e2AST, Command cAST, SourcePosition thePosition) {
+  public ForDoCommand (VarDeclarationInitialization vAST, Expression e2AST, Command cAST, SourcePosition thePosition) {
     super (thePosition);
-    E1 = e1AST;
-    E2 = e2AST;
+    V1 = vAST;
+    E1 = e2AST;
     C = cAST;
   }
 
