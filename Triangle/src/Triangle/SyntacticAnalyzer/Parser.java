@@ -815,9 +815,8 @@ public class Parser {
                 acceptIt();
                 declarationAST = parseSingleDeclaration();
 
-                accept(Token.AND);
                 do {
-                    acceptIt();
+                    accept(Token.AND);
                     Declaration d2AST = parseCompoundDeclaration();
                     finish(declarationPos);
                     declarationAST = new ParDeclaration(declarationAST, d2AST, declarationPos);
@@ -902,9 +901,8 @@ public class Parser {
         start(declarationPos);
         declarationAST = parseProcFuncDeclaration();
 
-        accept(Token.AND);
         do {
-            acceptIt();
+            accept(Token.AND);
             Declaration d2AST = parseProcFuncDeclaration();
             finish(declarationPos);
             declarationAST = new SequentialDeclaration(declarationAST, d2AST, declarationPos);

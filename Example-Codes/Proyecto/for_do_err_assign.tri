@@ -4,6 +4,7 @@ in
 
 	num := 3;
 	for var i := 1 to 5 do
-		putint(num * i)
+		putint(num * i);
+		i := i + 1
 	end
 end
