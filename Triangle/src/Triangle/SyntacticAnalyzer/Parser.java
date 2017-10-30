@@ -815,12 +815,13 @@ public class Parser {
                 acceptIt();
                 declarationAST = parseSingleDeclaration();
 
-                while (currentToken.kind == Token.AND) {
+                accept(Token.AND);
+                do {
                     acceptIt();
                     Declaration d2AST = parseCompoundDeclaration();
                     finish(declarationPos);
                     declarationAST = new ParDeclaration(declarationAST, d2AST, declarationPos);
-                }
+                } while (currentToken.kind == Token.AND);
 
                 accept(Token.END);
             }
@@ -901,14 +902,13 @@ public class Parser {
         start(declarationPos);
         declarationAST = parseProcFuncDeclaration();
 
-        while (currentToken.kind == Token.LPAREN) {
+        accept(Token.AND);
+        do {
             acceptIt();
-            accept(Token.AND);
             Declaration d2AST = parseProcFuncDeclaration();
             finish(declarationPos);
-            accept(Token.RPAREN);
             declarationAST = new SequentialDeclaration(declarationAST, d2AST, declarationPos);
-        }
+        } while (currentToken.kind == Token.AND);
 
         return declarationAST;
     }
