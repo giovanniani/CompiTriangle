@@ -1,15 +1,8 @@
 let
-	!const test ~ 2
-	!var num := 3
-	var num: Integer
+	var car1 := 4
 in
 
-	num := true;
-
-	repeat while (num < 5) do
-		putint(num);
-		num := num +1
-	end
-
+	car1 := car1 + 1;
+	put(car1)
 
 end

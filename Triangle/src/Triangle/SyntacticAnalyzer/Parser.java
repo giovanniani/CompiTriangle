@@ -382,6 +382,7 @@ public class Parser {
                 Identifier iAST = parseIdentifier();
                 accept(Token.BECOMES);
                 Expression eAST1 = parseExpression();
+                VarDeclarationInitialization vAST = new VarDeclarationInitialization(iAST,eAST1,commandPos);
                 accept(Token.TO);
                 Expression eAST2 = parseExpression();
 
@@ -393,7 +394,7 @@ public class Parser {
                         cAST = parseCommand();
                         accept(Token.END);
                         finish(commandPos);
-                        commandAST = new ForDoCommand(eAST1, eAST2, cAST, commandPos);
+                        commandAST = new ForDoCommand(vAST, eAST2, cAST, commandPos);
                         break;
 
                     // "for" "var" Identifier ":=" Expression "to" Expression "until" Expression "do" Command "end".
