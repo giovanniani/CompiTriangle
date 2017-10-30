@@ -1,0 +1,16 @@
+let 
+	var num: Integer;
+	recursive
+		proc test1(a: Integer) ~ num:= num + a end
+		and
+		proc test2(a: Integer) ~ num:= num * a end
+		and
+		func test3(a: Integer) : Integer ~ a * a
+	end
+
+in
+	num := test3(2);
+
+	test1(num);
+	putint(num)
+end
