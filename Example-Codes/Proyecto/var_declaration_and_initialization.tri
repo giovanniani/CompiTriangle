@@ -2,6 +2,8 @@ let
 	var num: Integer
 in
 
+	num := 0;
+	putint(num);
 	num := 1;
 	putint(num)
 

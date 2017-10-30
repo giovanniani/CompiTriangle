@@ -955,10 +955,11 @@ public class Parser {
 
                     // var Id := Exp
                     case Token.BECOMES:
+                        Vname vAST = parseRestOfVname(iAST);
                         acceptIt();
                         Expression eAST = parseExpression();
                         finish(declarationPos);
-                        declarationAST = new VarDeclarationInitialization(iAST, eAST, declarationPos);
+                        declarationAST = new VarDeclarationInitialization(iAST, null, vAST, eAST, declarationPos);
                         break;
 
                     default:

@@ -17,12 +17,16 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 public class VarDeclarationInitialization extends Declaration {
 
   public Identifier I;
+  public TypeDenoter T;
+  public Vname V;
   public Expression E;
 
-  public VarDeclarationInitialization (Identifier iAST, Expression eAST, SourcePosition thePosition) {
+  public VarDeclarationInitialization (Identifier iAST, TypeDenoter tAST, Vname vAST, Expression eAST, SourcePosition thePosition) {
     super (thePosition);
 
     I = iAST;
+    T = tAST;
+    V = vAST;
     E = eAST;
   }
 

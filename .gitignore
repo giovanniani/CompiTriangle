@@ -13,6 +13,8 @@
 /IDE-Triangle/build/**
 /IDE-Triangle/nbproject
 /IDE-Triangle/nbproject/**
+/IDE-Triangle/nbproject/private/**
+/IDE-Triangle/nbproject/private/private.properties
 /IDE-Triangle/dist
 /IDE-Triangle/dist/**
 
@@ -22,5 +24,7 @@
 /Triangle/build/**
 /Triangle/nbproject
 /Triangle/nbproject/**
+/Triangle/nbproject/private/**
+/Triangle/nbproject/private/private.properties
 /Triangle/dist
 /Triangle/dist/**

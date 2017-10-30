@@ -307,7 +307,7 @@ public class TreeVisitor implements Visitor {
      * @return 
      */
     public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object obj) {
-        return(createBinary("Variable Declaration Initialization", ast.I, ast.E));
+        return(createTernary("Variable Declaration Initialization", ast.I, ast.T, ast.E));
     }
 
     /**

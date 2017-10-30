@@ -553,9 +553,13 @@ public final class Checker implements Visitor {
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     idTable.enter(ast.I.spelling, ast);
 
+    ast.T = eType;
+
     if (ast.duplicated) {
       reporter.reportError ("identifier \"%\" already declared", ast.I.spelling, ast.position);
     }
+
+    TypeDenoter vType = (TypeDenoter) ast.V.visit(this, null);
 
     return null;
   }

@@ -1,16 +1,29 @@
 let
 	var num := 3;
-	var car1 := 4
+	var car := 4
 in
 
+	put('O');
+	put(' ');
+	putint(num);
+	puteol();
+	put('A');
+	put(' ');
 	num := 2;
+	putint(num);
+	puteol();
+	puteol();
 
-	repeat while (num < 5) do
+	repeat while (num < 10) do
 		putint(num);
+		put(' ');
 		num := num +1
 	end;
 
-	car1 := car1 + 1;
-	put(car1)
+	puteol();
+	puteol();
+	car := car * num;
+	putint(car);
+	puteol()
 
 end

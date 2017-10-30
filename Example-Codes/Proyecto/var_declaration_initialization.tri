@@ -1,7 +1,9 @@
 let
-	var num := 1
+	var num := 0
 in
 
+	putint(num);
+	num := 1;
 	putint(num)
 
 end

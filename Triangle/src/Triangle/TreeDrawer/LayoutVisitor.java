@@ -296,7 +296,7 @@ public class LayoutVisitor implements Visitor {
   }
 
   public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object obj) {
-    return layoutBinary("VarDeclInit.", ast.I, ast.E);
+    return layoutTernary("VarDeclInit.", ast.I, ast.T, ast.E);
   }
 
   public Object visitLocalDeclaration(LocalDeclaration ast, Object obj) {
