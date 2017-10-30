@@ -1,0 +1,14 @@
+let
+	var num: Integer;
+	proc test (a: Integer) ~
+	begin
+		num := a + 2
+	end
+in
+begin
+
+	num := 2;
+	test(5);
+	putint(num)
+
+end

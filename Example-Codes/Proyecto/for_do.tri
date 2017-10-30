@@ -6,4 +6,5 @@ in
 	for var i := 1 to 5 do
 		putint(num * i)
 	end
+
 end

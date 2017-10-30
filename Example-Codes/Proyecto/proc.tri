@@ -1,9 +1,17 @@
-let
-	const c ~2;
-	recursive 
-		proc proecedimiento(var a: Integer) ~ a := c+2 end
-	end;
-	var e := 3 
-in 
-	skip
+let
+
+	var x : Integer;
+	const y ~ 2;
+	recursive 
+		proc d1(a: Integer) ~ x:= a +2 end and
+		proc d2(a: Integer) ~ x:= a * 2 end and
+		func d3(a: Integer) : Integer ~ a * a
+	end
+
+in
+
+	x := y * 3;
+	d2(3);
+	putint(x)
+
 end

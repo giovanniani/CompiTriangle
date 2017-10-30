@@ -1,11 +1,10 @@
 let
-	var n1: Integer;
-	var n2: Integer;
 	var num: Integer
 in
 
-	for var test := 2 to 5 until 10 do
-		put('M')
+	num := 3;
+	for var i := 1 to 5 until i < 1 do
+		putint(num * i)
 	end
 
 end
