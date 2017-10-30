@@ -212,14 +212,12 @@ public final class Encoder implements Visitor {
    */
   public Object visitRepeatDoUntilCommand(RepeatDoUntilCommand ast, Object o) {
     Frame frame = (Frame) o;
-    int jumpAddr, loopAddr;
+    int loopAddr;
 
-    jumpAddr = nextInstrAddr;
     loopAddr = nextInstrAddr;
     ast.C.visit(this, frame);
-    patch(jumpAddr, nextInstrAddr);
     ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
+    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
 
     return null;
   }
@@ -233,14 +231,12 @@ public final class Encoder implements Visitor {
    */
   public Object visitRepeatDoWhileCommand(RepeatDoWhileCommand ast, Object o) {
     Frame frame = (Frame) o;
-    int jumpAddr, loopAddr;
+    int loopAddr;
 
-    jumpAddr = nextInstrAddr;
     loopAddr = nextInstrAddr;
     ast.C.visit(this, frame);
-    patch(jumpAddr, nextInstrAddr);
     ast.E.visit(this, frame);
-    emit(Machine.JUMPIFop, Machine.falseRep, Machine.CBr, loopAddr);
+    emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
 
     return null;
   }
@@ -526,17 +522,16 @@ public final class Encoder implements Visitor {
 
     if (ast.E instanceof CharacterExpression) {
         CharacterLiteral CL = ((CharacterExpression) ast.E).CL;
-        ast.entity = new KnownValue(Machine.characterSize,
-                                 characterValuation(CL.spelling));
+        ast.entity = new KnownValue(Machine.characterSize, characterValuation(CL.spelling));
     } else if (ast.E instanceof IntegerExpression) {
         IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
-        ast.entity = new KnownValue(Machine.integerSize,
-				 Integer.parseInt(IL.spelling));
+        ast.entity = new KnownValue(Machine.integerSize, Integer.parseInt(IL.spelling));
     } else {
       int valSize = ((Integer) ast.E.visit(this, frame)).intValue();
       ast.entity = new UnknownValue(valSize, frame.level, frame.size);
       extraSize = valSize;
     }
+
     writeTableDetails(ast);
     return new Integer(extraSize);
   }

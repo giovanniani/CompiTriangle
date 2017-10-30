@@ -1,0 +1,8 @@
+let
+	var num: Integer
+in
+
+	num := 1;
+	putint(num)
+
+end

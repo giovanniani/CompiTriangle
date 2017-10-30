@@ -1,0 +1,11 @@
+let
+	var lit := 'A'
+in
+
+	put(lit);
+
+	lit := 'B';
+
+	put(lit)
+
+end
