@@ -1,10 +1,8 @@
 let
-	!const test ~ 2
-	!var num := 3
-	var num: Integer
+	var num := 3
 in
 
-	num := true;
+	num := 2;
 
 	repeat while (num < 5) do
 		putint(num);
