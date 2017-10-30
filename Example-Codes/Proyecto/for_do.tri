@@ -1,15 +1,14 @@
 let
-	var num := 8
+	var num := 5
 in
 
-	!putint(num);
-	!puteol();
+	for var i := 2 to 3 do
 
-	for var i := 1 to 3 do
-
+		putint(num);
 		puteol();
-		putint(i)
-		!putint(num * i)
+		putint(i);
+		puteol();
+		putint(num * i)
 	end
 
 end

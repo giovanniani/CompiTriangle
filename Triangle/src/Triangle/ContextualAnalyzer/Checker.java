@@ -174,7 +174,6 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) {
-    TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
@@ -197,7 +196,6 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) {
-    TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
@@ -226,7 +224,6 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) {
-    TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
