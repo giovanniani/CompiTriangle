@@ -1,0 +1,16 @@
+let 
+  var x := 2;
+  const y ~2;
+  var x2 : Integer;
+  recursive 
+    func d0(a: Integer) : Integer ~ a*2 and
+    proc d1(a: Integer) ~ x2:= a+2 end and
+    proc d2(a: Integer) ~ x2:= a*3 end and
+    func d3(a: Integer) : Integer ~ a*a
+  end
+
+in
+   x2:= y*3;
+   d2(x2)
+
+end

@@ -1,0 +1,10 @@
+let 
+
+  recursive 
+    proc d(var a: Integer)~ a:=a+2 end and
+    ! falta el proc-func
+  end
+
+in
+   skip 
+end
