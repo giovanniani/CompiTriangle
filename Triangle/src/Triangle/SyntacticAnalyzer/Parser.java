@@ -380,10 +380,11 @@ public class Parser {
                 Expression eAST3;
                 accept(Token.VAR);
                 Identifier iAST = parseIdentifier();
+                Vname vnAST = parseRestOfVname(iAST);
                 accept(Token.BECOMES);
                 Expression eAST1 = parseExpression();
                 finish(commandPos);
-                ForVarDeclaration vAST = new ForVarDeclaration(iAST, eAST1, commandPos);
+                ForVarDeclaration vAST = new ForVarDeclaration(iAST, vnAST, eAST1, commandPos);
                 accept(Token.TO);
                 Expression eAST2 = parseExpression();
 

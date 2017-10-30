@@ -425,74 +425,78 @@ public class TableVisitor implements Visitor {
       return(null);
   }
 
-  /**
-   * Add visitForVarDeclaration.
-   * 
-   * @param ast
-   * @param o
-   * @return 
-   */
-  public Object visitForVarDeclaration(ForVarDeclaration ast, Object o) {   
-      String name = ast.I.spelling;
-      String type = "N/A";
-      try {
-        int size = (ast.entity!=null?ast.entity.size:0);
-        int level = -1;
-        int displacement = -1;
-        int value = -1;
+    /**
+     * Add visitForVarDeclaration.
+     * 
+     * @param ast
+     * @param o
+     * @return 
+     */
+    public Object visitForVarDeclaration(ForVarDeclaration ast, Object o) {   
+        String name = ast.I.spelling;
+        String type = "N/A";
+
+        try {
+            int size = (ast.entity!=null?ast.entity.size:0);
+            int level = -1;
+            int displacement = -1;
+            int value = -1;
       
-        if (ast.entity instanceof KnownValue) {
-              type = "KnownValue";
-              value = ((KnownValue)ast.entity).value;
-          }
-          else if (ast.entity instanceof UnknownValue) {
-              type = "UnknownValue";
-              level = ((UnknownValue)ast.entity).address.level;
-              displacement = ((UnknownValue)ast.entity).address.displacement;
-          }
-          addIdentifier(name, type, size, level, displacement, value);
-      } catch (NullPointerException e) { }
+            if (ast.entity instanceof KnownValue) {
+                type = "KnownValue";
+                value = ((KnownValue)ast.entity).value;
+            } else if (ast.entity instanceof UnknownValue) {
+                type = "UnknownValue";
+                level = ((UnknownValue)ast.entity).address.level;
+                displacement = ((UnknownValue)ast.entity).address.displacement;
+            }
+
+            addIdentifier(name, type, size, level, displacement, value);
+        } catch (NullPointerException e) { }
       
-      ast.E.visit(this, null);
-      ast.I.visit(this, null);
+        ast.E.visit(this, null);
+        ast.I.visit(this, null);
+        ast.V.visit(this, null);
 
-      return(null);
-  }
+        return(null);
+    }
 
-  /**
-   * Add visitVarDeclarationInitialization.
-   * 
-   * @param ast
-   * @param o
-   * @return 
-   */
-  public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o) {   
-    String name = ast.I.spelling;
-    String type = "N/A";
-    try {
-      int size = (ast.entity!=null?ast.entity.size:0);
-      int level = -1;
-      int displacement = -1;
-      int value = -1;
+    /**
+     * Add visitVarDeclarationInitialization.
+     * 
+     * @param ast
+     * @param o
+     * @return 
+     */
+    public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o) {   
+        String name = ast.I.spelling;
+        String type = "N/A";
+
+        try {
+            int size = (ast.entity!=null?ast.entity.size:0);
+            int level = -1;
+            int displacement = -1;
+            int value = -1;
       
-      if (ast.entity instanceof KnownValue) {
-        type = "KnownValue";
-        value = ((KnownValue)ast.entity).value;
-      } else if (ast.entity instanceof UnknownValue) {
-        type = "UnknownValue";
-        level = ((UnknownValue)ast.entity).address.level;
-        displacement = ((UnknownValue)ast.entity).address.displacement;
-      }
-        addIdentifier(name, type, size, level, displacement, value);
-    } catch (NullPointerException e) { }
+            if (ast.entity instanceof KnownValue) {
+                type = "KnownValue";
+                value = ((KnownValue)ast.entity).value;
+            } else if (ast.entity instanceof UnknownValue) {
+                type = "UnknownValue";
+                level = ((UnknownValue)ast.entity).address.level;
+                displacement = ((UnknownValue)ast.entity).address.displacement;
+            }
 
-    ast.E.visit(this, null);
-    ast.T.visit(this, null);
-    ast.I.visit(this, null);
-    ast.V.visit(this, null);
+            addIdentifier(name, type, size, level, displacement, value);
+        } catch (NullPointerException e) { }
 
-    return(null);
-  }
+        ast.E.visit(this, null);
+        ast.T.visit(this, null);
+        ast.I.visit(this, null);
+        ast.V.visit(this, null);
+
+        return(null);
+    }
 
   /**
    * Add visitLocalDeclaration.

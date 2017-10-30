@@ -178,6 +178,17 @@ public final class Encoder implements Visitor {
    * @return 
    */
   public Object visitForDoCommand(ForDoCommand ast, Object o) {
+    Frame frame = (Frame) o;
+    int jumpAddr, loopAddr;
+
+    //jumpAddr = nextInstrAddr;
+    //emit(Machine.JUMPop, 0, Machine.CBr, 0);
+    loopAddr = nextInstrAddr;
+    ast.C.visit(this, frame);
+    //patch(jumpAddr, nextInstrAddr);
+    ast.E2.visit(this, frame);
+    //emit(Machine.JUMPIFop, Machine.trueRep, Machine.CBr, loopAddr);
+
     return null;
   }
 
@@ -490,22 +501,18 @@ public final class Encoder implements Visitor {
    */
   public Object visitForVarDeclaration(ForVarDeclaration ast, Object o) {
     Frame frame = (Frame) o;
-    int extraSize = 0;
+    int extraSize;
 
-    if (ast.E instanceof CharacterExpression) {
-        CharacterLiteral CL = ((CharacterExpression) ast.E).CL;
-        ast.entity = new KnownValue(Machine.characterSize,
-                                 characterValuation(CL.spelling));
-    } else if (ast.E instanceof IntegerExpression) {
-        IntegerLiteral IL = ((IntegerExpression) ast.E).IL;
-        ast.entity = new KnownValue(Machine.integerSize,
-				 Integer.parseInt(IL.spelling));
-    } else {
-      int valSize = ((Integer) ast.E.visit(this, frame)).intValue();
-      ast.entity = new UnknownValue(valSize, frame.level, frame.size);
-      extraSize = valSize;
-    }
+    // Variable declaration.
+    extraSize = ((Integer) ast.E.visit(this, frame)).intValue();
+    emit(Machine.PUSHop, 0, 0, extraSize);
+    ast.entity = new KnownAddress(Machine.addressSize, frame.level, frame.size);
     writeTableDetails(ast);
+
+    // Variable initialization.
+    Integer valSize = (Integer) ast.E.visit(this, frame);
+    encodeStore(ast.V, new Frame (frame, valSize.intValue()), valSize.intValue());
+
     return new Integer(extraSize);
   }
 

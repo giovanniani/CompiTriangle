@@ -177,10 +177,6 @@ public final class Checker implements Visitor {
     TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
 
-    if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.V.E.position);
-    }
-
     if (! e2Type.equals(StdEnvironment.integerType)) {
       reporter.reportError("Integer expression expected here", "", ast.E2.position);
     }
@@ -203,10 +199,6 @@ public final class Checker implements Visitor {
   public Object visitForUntilDoCommand(ForUntilDoCommand ast, Object o) {
     TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
-
-    if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.V.E.position);
-    }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
       reporter.reportError("Integer expression expected here", "", ast.E2.position);
@@ -236,10 +228,6 @@ public final class Checker implements Visitor {
   public Object visitForWhileDoCommand(ForWhileDoCommand ast, Object o) {
     TypeDenoter e1Type = (TypeDenoter) ast.V.E.visit(this, null);
     TypeDenoter e2Type = (TypeDenoter) ast.E2.visit(this, null);
-
-    if (! e1Type.equals(StdEnvironment.integerType)) {
-      reporter.reportError("Integer expression expected here", "", ast.V.E.position);
-    }
 
     if (! e2Type.equals(StdEnvironment.integerType)) {
       reporter.reportError("Integer expression expected here", "", ast.E2.position);
@@ -535,9 +523,17 @@ public final class Checker implements Visitor {
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     idTable.enter(ast.I.spelling, ast);
 
+/*
     if (ast.duplicated) {
       reporter.reportError ("identifier \"%\" already declared", ast.I.spelling, ast.position);
     }
+*/
+
+    if (! eType.equals(StdEnvironment.integerType)) {
+      reporter.reportError("Integer expression expected here", "", ast.E.position);
+    }
+
+    ast.V.visit(this, null);
 
     return null;
   }

@@ -16,9 +16,15 @@ import Triangle.SyntacticAnalyzer.SourcePosition;
 
 public class ForVarDeclaration extends Declaration {
 
-  public ForVarDeclaration (Identifier iAST, Expression eAST, SourcePosition thePosition) {
+  public Identifier I;
+  public Vname V;
+  public Expression E;
+
+  public ForVarDeclaration (Identifier iAST, Vname vAST, Expression eAST, SourcePosition thePosition) {
     super (thePosition);
+
     I = iAST;
+    V = vAST;
     E = eAST;
   }
 
@@ -26,6 +32,4 @@ public class ForVarDeclaration extends Declaration {
     return v.visitForVarDeclaration(this, o);
   }
 
-  public Identifier I;
-  public Expression E;
 }

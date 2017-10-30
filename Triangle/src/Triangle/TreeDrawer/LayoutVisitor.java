@@ -289,7 +289,9 @@ public class LayoutVisitor implements Visitor {
     return layoutBinary("VarDecl.", ast.I, ast.T);
   }
 
-  // Add new Declarations.
+  /**
+   * Add new Declarations.
+   */
 
   public Object visitForVarDeclaration(ForVarDeclaration ast, Object obj) {
     return layoutBinary("ForVarDecl.", ast.I, ast.E);
