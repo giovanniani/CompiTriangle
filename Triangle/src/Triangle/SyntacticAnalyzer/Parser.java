@@ -382,7 +382,8 @@ public class Parser {
                 Identifier iAST = parseIdentifier();
                 accept(Token.BECOMES);
                 Expression eAST1 = parseExpression();
-                ForVarDeclaration vAST = new ForVarDeclaration(iAST,eAST1,commandPos);
+                finish(commandPos);
+                ForVarDeclaration vAST = new ForVarDeclaration(iAST, eAST1, commandPos);
                 accept(Token.TO);
                 Expression eAST2 = parseExpression();
 
