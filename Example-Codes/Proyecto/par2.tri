@@ -7,6 +7,8 @@ let
 		const b ~ 1
 		and
 		var c := 'a'
+		and
+		var a := 'a'
 
 	end
 

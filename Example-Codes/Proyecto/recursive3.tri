@@ -4,11 +4,15 @@ let
 
   recursive
 
-    proc a() ~ put('Z') ; putint (0) end
+    proc a() ~ put('A') ; puteol() ; putint (0) end
     and
     func b(): Integer ~ 5
     and
-    proc c() ~ put('c') ; putint (1) end
+    proc c() ~ put('C') ; puteol() ; putint (1) end
+    and
+    proc d() ~ put('D') ; a() ; c() ; e() end
+    and
+    proc e() ~  put('E') end
     and
     func z(): Char ~ 'A'
 
@@ -16,7 +20,7 @@ let
 
   var x : Integer
 
-  in
+in
 
    putint(x + b())
 
