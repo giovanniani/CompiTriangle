@@ -565,13 +565,21 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
-    Identifier i = null;
-    Declaration binding = ast.D2;
-
     idTable.openScope();
     ast.D1.visit(this, null);
     ast.D2.visit(this, null);
     idTable.closeScope();
+    exportScope(ast.D2);
+
+    return null;
+  }
+
+  /**
+   * 
+   * @param binding 
+   */
+  public void exportScope(Declaration binding) {
+    Identifier i = null;
 
     if (binding instanceof ConstDeclaration) {
       i = ((ConstDeclaration) binding).I;
@@ -583,16 +591,17 @@ public final class Checker implements Visitor {
       i = ((VarFormalParameter) binding).I;
     } else if (binding instanceof VarDeclarationInitialization) {
       i = ((VarDeclarationInitialization) binding).I;
+    } else if (binding instanceof SequentialDeclaration){
+      exportScope( ( (SequentialDeclaration) binding ).D1 );
+      exportScope( ( (SequentialDeclaration) binding ).D2 );
     } else {
-      //reporter.reportError ("\"%\" is not a const or var identifier", ast.I.spelling, ast.I.position);
-      reporter.reportError ("\"%\" is not a const or var identifier", "0", null);
+      reporter.reportError ("Is not a CONST or VAR identifier", "", binding.position);
     }
 
-    idTable.enter(i.spelling, ast.D2);
-    
-    System.out.println(i.spelling);
+    if (i != null) {
+      idTable.enter(i.spelling, binding);
+    }
 
-    return null;
   }
 
   /**
