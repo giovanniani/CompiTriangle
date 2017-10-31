@@ -9,6 +9,8 @@ in
 		putint(i);
 		puteol();
 		putint(num * i)
-	end
+	end;
+
+	putint(i)
 
 end

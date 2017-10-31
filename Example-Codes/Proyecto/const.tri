@@ -1,0 +1,5 @@
+let
+	const a ~ 5
+in
+	putint(a)
+end

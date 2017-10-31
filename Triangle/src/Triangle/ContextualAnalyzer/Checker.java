@@ -558,35 +558,65 @@ public final class Checker implements Visitor {
   }
 
   /**
-   * Add visitLocalDeclarationInitialization.
+   * Add visitLocalDeclaration.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+    Identifier i = null;
+    Declaration binding = ast.D2;
+
+    idTable.openScope();
     ast.D1.visit(this, null);
     ast.D2.visit(this, null);
+    idTable.closeScope();
+
+    if (binding instanceof ConstDeclaration) {
+      i = ((ConstDeclaration) binding).I;
+    } else if (binding instanceof VarDeclaration) {
+      i = ((VarDeclaration) binding).I;
+    } else if (binding instanceof ConstFormalParameter) {
+      i = ((ConstFormalParameter) binding).I;
+    } else if (binding instanceof VarFormalParameter) {
+      i = ((VarFormalParameter) binding).I;
+    } else if (binding instanceof VarDeclarationInitialization) {
+      i = ((VarDeclarationInitialization) binding).I;
+    } else {
+      //reporter.reportError ("\"%\" is not a const or var identifier", ast.I.spelling, ast.I.position);
+      reporter.reportError ("\"%\" is not a const or var identifier", "0", null);
+    }
+
+    idTable.enter(i.spelling, ast.D2);
+    
+    System.out.println(i.spelling);
 
     return null;
   }
 
   /**
-   * Add visitParDeclarationInitialization.
+   * Add visitParDeclaration.
    * 
    * @param ast
    * @param o
    * @return 
    */
   public Object visitParDeclaration(ParDeclaration ast, Object o) {
+    idTable.openScope();
     ast.D1.visit(this, null);
+    idTable.closeScope();
+    idTable.openScope();
     ast.D2.visit(this, null);
+    idTable.closeScope();
+
+    
 
     return null;
   }
 
   /**
-   * Add visitRecursiveDeclarationInitialization.
+   * Add visitRecursiveDeclaration.
    * 
    * @param ast
    * @param o
