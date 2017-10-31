@@ -9,7 +9,7 @@ let
       in
 
           const d ~ a + b * c;
-          const e ~ a * b + c
+          const a ~ a * b + c
 
   end;
 
@@ -19,6 +19,6 @@ in
 
   putint(d);
   puteol();
-  putint(e)
+  putint(a)
 
 end

@@ -9,8 +9,10 @@ let
 	end
 
 in
+
 	num := test3(2);
 
 	test1(num);
 	putint(num)
+
 end
