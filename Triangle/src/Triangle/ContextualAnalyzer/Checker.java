@@ -145,6 +145,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitLetCommand(LetCommand ast, Object o) {
+    System.out.println("Estoy en el let");
     idTable.openScope();
     ast.D.visit(this, null);
     ast.C.visit(this, null);
@@ -153,6 +154,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitSequentialCommand(SequentialCommand ast, Object o) {
+    System.out.println("Estoy en el visitSequentialCommand"); 
     ast.C1.visit(this, null);
     ast.C2.visit(this, null);
     return null;
@@ -444,6 +446,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitConstDeclaration(ConstDeclaration ast, Object o) {
+    System.out.println("Estoy en el visitConstDeclaration");  
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     idTable.enter(ast.I.spelling, ast);
     if (ast.duplicated)
@@ -481,6 +484,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitSequentialDeclaration(SequentialDeclaration ast, Object o) {
+    System.out.println("Estoy en el visitSequentialDeclaration"); 
     ast.D1.visit(this, null);
     ast.D2.visit(this, null);
     return null;
@@ -500,7 +504,8 @@ public final class Checker implements Visitor {
   }
 
   public Object visitVarDeclaration(VarDeclaration ast, Object o) {
-    ast.T = (TypeDenoter) ast.T.visit(this, null);
+    System.out.println("Estoy en el visitVarDeclaration"); 
+      ast.T = (TypeDenoter) ast.T.visit(this, null);
     idTable.enter (ast.I.spelling, ast);
     if (ast.duplicated)
       reporter.reportError ("identifier \"%\" already declared",
@@ -545,7 +550,7 @@ public final class Checker implements Visitor {
   public Object visitVarDeclarationInitialization(VarDeclarationInitialization ast, Object o) {
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     idTable.enter(ast.I.spelling, ast);
-
+    System.out.println("Estoy en el visitVarDeclarationInitialization"); 
     ast.T = eType;
 
     if (ast.duplicated) {
@@ -573,7 +578,7 @@ public final class Checker implements Visitor {
     ast.D2.visit(this, null);
     idTable.closeScope();
 
-    if (binding instanceof ConstDeclaration) {
+    /*if (binding instanceof ConstDeclaration) {
       i = ((ConstDeclaration) binding).I;
     } else if (binding instanceof VarDeclaration) {
       i = ((VarDeclaration) binding).I;
@@ -590,10 +595,36 @@ public final class Checker implements Visitor {
 
     idTable.enter(i.spelling, ast.D2);
     
-    System.out.println(i.spelling);
+    System.out.println(i.spelling);*/
+    idTableEnter(binding);
 
     return null;
   }
+  
+  public void idTableEnter(Declaration binding)
+  {
+    Identifier i = null;
+    if (binding instanceof ConstDeclaration) {
+      i = ((ConstDeclaration) binding).I;
+    } else if (binding instanceof VarDeclaration) {
+      i = ((VarDeclaration) binding).I;
+    } else if (binding instanceof ConstFormalParameter) {
+      i = ((ConstFormalParameter) binding).I;
+    } else if (binding instanceof VarFormalParameter) {
+      i = ((VarFormalParameter) binding).I;
+    } else if (binding instanceof VarDeclarationInitialization) {
+      i = ((VarDeclarationInitialization) binding).I;
+    } else if (binding instanceof SequentialDeclaration){
+        idTableEnter(((SequentialDeclaration)binding).D1);
+    }else {
+      //reporter.reportError ("\"%\" is not a const or var identifier", ast.I.spelling, ast.I.position);
+      reporter.reportError ("\"%\" is not a const or var identifier", "0", null);
+    }
+    System.out.println("identificador: "+i.spelling);
+    idTable.enter(i.spelling, binding);
+  }
+  
+
 
   /**
    * Add visitParDeclaration.
@@ -635,6 +666,7 @@ public final class Checker implements Visitor {
   // given object.
 
   public Object visitMultipleArrayAggregate(MultipleArrayAggregate ast, Object o) {
+    System.out.println("Estoy en el visitMultipleArrayAggregate"); 
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     TypeDenoter elemType = (TypeDenoter) ast.AA.visit(this, null);
     ast.elemCount = ast.AA.elemCount + 1;
@@ -655,6 +687,8 @@ public final class Checker implements Visitor {
   // given object.
 
   public Object visitMultipleRecordAggregate(MultipleRecordAggregate ast, Object o) {
+   
+    System.out.println("Estoy en el visitMultipleRecordAggregate"); 
     TypeDenoter eType = (TypeDenoter) ast.E.visit(this, null);
     FieldTypeDenoter rType = (FieldTypeDenoter) ast.RA.visit(this, null);
     TypeDenoter fType = checkFieldIdentifier(rType, ast.I);
@@ -677,6 +711,7 @@ public final class Checker implements Visitor {
 
   public Object visitConstFormalParameter(ConstFormalParameter ast, Object o) {
     ast.T = (TypeDenoter) ast.T.visit(this, null);
+    System.out.println("Estoy en el visitConstFormalParameter"); 
     idTable.enter(ast.I.spelling, ast);
     if (ast.duplicated)
       reporter.reportError ("duplicated formal parameter \"%\"",
@@ -709,6 +744,7 @@ public final class Checker implements Visitor {
 
   public Object visitVarFormalParameter(VarFormalParameter ast, Object o) {
     ast.T = (TypeDenoter) ast.T.visit(this, null);
+   System.out.println("Estoy en el visitVarFormalParameter"); 
     idTable.enter (ast.I.spelling, ast);
     if (ast.duplicated)
       reporter.reportError ("duplicated formal parameter \"%\"",
@@ -721,6 +757,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitMultipleFormalParameterSequence(MultipleFormalParameterSequence ast, Object o) {
+    System.out.println("Estoy en el visitMultipleFormalParameterSequence"); 
     ast.FP.visit(this, null);
     ast.FPS.visit(this, null);
     return null;
@@ -831,6 +868,7 @@ public final class Checker implements Visitor {
   }
 
   public Object visitMultipleActualParameterSequence(MultipleActualParameterSequence ast, Object o) {
+    System.out.println("Estoy en el visitMultipleActualParameterSequence"); 
     FormalParameterSequence fps = (FormalParameterSequence) o;
     if (! (fps instanceof MultipleFormalParameterSequence))
       reporter.reportError ("too many actual parameters", "", ast.position);
@@ -902,6 +940,8 @@ public final class Checker implements Visitor {
   }
 
   public Object visitMultipleFieldTypeDenoter(MultipleFieldTypeDenoter ast, Object o) {
+    
+    System.out.println("Estoy en el visitMultipleFieldTypeDenoter"); 
     ast.T = (TypeDenoter) ast.T.visit(this, null);
     ast.FT.visit(this, null);
     return ast;
