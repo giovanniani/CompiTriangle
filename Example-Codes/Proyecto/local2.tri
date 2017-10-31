@@ -1,20 +1,24 @@
-let 
-
-	local
-		var a := 5;
-		var b := 6;
-		var c := 7
-    	in
-       		const d ~ a + b * c;
-       		const e ~ a * b + c
-
-	end;
-	var f := 5
-
-in
-
-	putint(d);
-	puteol()!;
-	!putint(e)
-
+let
+
+  local
+
+    var a := 5;
+    var b := 6;
+    var c := 7
+
+      in
+
+          const d ~ a + b * c;
+          const e ~ a * b + c
+
+  end;
+
+  var f := 5
+
+in
+
+  putint(d);
+  puteol();
+  putint(e)
+
 end

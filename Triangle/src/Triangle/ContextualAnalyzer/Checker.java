@@ -594,6 +594,9 @@ public final class Checker implements Visitor {
     } else if (binding instanceof SequentialDeclaration){
       exportScope( ( (SequentialDeclaration) binding ).D1 );
       exportScope( ( (SequentialDeclaration) binding ).D2 );
+    } else if (binding instanceof ParDeclaration){
+      exportScope( ( (ParDeclaration) binding ).D1 );
+      exportScope( ( (ParDeclaration) binding ).D2 );
     } else {
       reporter.reportError ("Is not a CONST or VAR identifier", "", binding.position);
     }
@@ -615,11 +618,13 @@ public final class Checker implements Visitor {
     idTable.openScope();
     ast.D1.visit(this, null);
     idTable.closeScope();
+
     idTable.openScope();
     ast.D2.visit(this, null);
     idTable.closeScope();
-
     
+    exportScope(ast.D1);
+    exportScope(ast.D2);
 
     return null;
   }

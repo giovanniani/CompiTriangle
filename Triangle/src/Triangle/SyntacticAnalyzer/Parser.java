@@ -819,7 +819,7 @@ public class Parser {
 
                 do {
                     accept(Token.AND);
-                    Declaration d2AST = parseCompoundDeclaration();
+                    Declaration d2AST = parseSingleDeclaration();
                     finish(declarationPos);
                     declarationAST = new ParDeclaration(declarationAST, d2AST, declarationPos);
                 } while (currentToken.kind == Token.AND);
