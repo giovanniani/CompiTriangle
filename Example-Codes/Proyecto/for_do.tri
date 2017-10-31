@@ -2,15 +2,14 @@ let
 	var num := 5
 in
 
-	for var i := 2 to 3 do
+	for var i := 2 to '3' do
 
 		putint(num);
 		puteol();
 		putint(i);
 		puteol();
 		putint(num * i)
-	end;
 
-	putint(i)
+	end
 
 end

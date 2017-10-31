@@ -5,8 +5,8 @@ let
 		var b := 6;
 		var c := 7
     	in
-       		const d ~ x + b * c!;
-       		!const d ~ a * b + c
+       		const d ~ a + b * c;
+       		const e ~ a * b + c
 
 	end;
 	var f := 5
