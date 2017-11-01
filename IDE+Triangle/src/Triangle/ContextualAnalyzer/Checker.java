@@ -619,9 +619,13 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+    // Exports all declarations, to allow mutually recursive structures.
     exportScopeRecursive(ast.D);
+
+    // Open scope to loop through syntax trees and avoid errors of duplicity of declarations.
     idTable.openScope();
     ast.D.visit(this, null);
+    // Close scope.
     idTable.closeScope();
 
     return null;

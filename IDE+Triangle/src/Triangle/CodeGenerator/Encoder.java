@@ -586,7 +586,12 @@ public final class Encoder implements Visitor {
    * @return 
    */
   public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
-    return null;
+    Frame frame = (Frame) o;
+    int extraSize;
+
+    extraSize = ((Integer) ast.D.visit(this, frame)).intValue();
+
+    return new Integer(extraSize);
   }
 
 

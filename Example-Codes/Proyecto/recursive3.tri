@@ -20,7 +20,7 @@ let
 
   end ; ! sigue procesando bien las declaraciones secuenciales
 
-  var x : Integer
+  var x := 7
 
 in
 
