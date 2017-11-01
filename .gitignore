@@ -18,6 +18,17 @@
 /IDE-Triangle/dist
 /IDE-Triangle/dist/**
 
+/IDE+Triangle/*.ini
+/IDE+Triangle/**/*.ini
+/IDE+Triangle/build
+/IDE+Triangle/build/**
+/IDE+Triangle/nbproject
+/IDE+Triangle/nbproject/**
+/IDE+Triangle/nbproject/private/**
+/IDE+Triangle/nbproject/private/private.properties
+/IDE+Triangle/dist
+/IDE+Triangle/dist/**
+
 /Triangle/*.ini
 /Triangle/**/*.ini
 /Triangle/build

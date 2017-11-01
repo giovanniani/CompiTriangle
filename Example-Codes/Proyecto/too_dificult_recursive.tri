@@ -1,0 +1,40 @@
+let
+	type Line ~
+		record
+			length: Integer,
+			content: array 80 of Char
+			end;
+	recursive
+		proc getline (var l: Line) ~
+			l.length := 0;
+			repeat while eol() do
+				get (var l.content[l.length]);
+				l.length := l.length + 1
+			end;
+			geteol()
+		end
+
+		and
+
+		proc putreversedline (l: Line) ~
+			let var i : Integer
+			in
+				i := l.length;
+				repeat while i > 0 do
+
+					i := i - 1;
+					put (l.content[i])
+				end;
+				puteol()
+			end
+		end
+	end;
+
+	var currentline: Line
+
+in
+	repeat while eof() do
+		getline(var currentline);
+		putreversedline(currentline)
+	end
+end

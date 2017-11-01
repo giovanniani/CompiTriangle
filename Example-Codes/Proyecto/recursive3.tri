@@ -10,9 +10,11 @@ let
     and
     proc c() ~ put('C') ; puteol() ; putint (1) end
     and
-    proc d() ~ put('D') ; a() ; c() ; e() end
+    proc d() ~ put('D') ; a() ; c() ; e() ; d() end
     and
     proc e() ~  put('E') end
+    and
+    proc f() ~  put('E') end
     and
     func z(): Char ~ 'A'
 

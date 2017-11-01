@@ -577,6 +577,44 @@ public final class Checker implements Visitor {
   }
 
   /**
+   * Add visitParDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitParDeclaration(ParDeclaration ast, Object o) {
+    idTable.openScope();
+    ast.D1.visit(this, null);
+    idTable.closeScope();
+
+    idTable.openScope();
+    ast.D2.visit(this, null);
+    idTable.closeScope();
+
+    ast.D1.visit(this, null);
+    ast.D2.visit(this, null);
+
+    return null;
+  }
+
+  /**
+   * Add visitRecursiveDeclaration.
+   * 
+   * @param ast
+   * @param o
+   * @return 
+   */
+  public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
+    exportScopeRecursive(ast.D);
+    idTable.openScope();
+    ast.D.visit(this, null);
+    idTable.closeScope();
+
+    return null;
+  }
+
+  /**
    * Add exportScope.
    * 
    * @param binding 
@@ -609,7 +647,7 @@ public final class Checker implements Visitor {
     }
 
   }
-  
+
   /**
    * Add exportScopeRecursive.
    * 
@@ -637,44 +675,6 @@ public final class Checker implements Visitor {
 
   }
 
-  /**
-   * Add visitParDeclaration.
-   * 
-   * @param ast
-   * @param o
-   * @return 
-   */
-  public Object visitParDeclaration(ParDeclaration ast, Object o) {
-    idTable.openScope();
-    ast.D1.visit(this, null);
-    idTable.closeScope();
-
-    idTable.openScope();
-    ast.D2.visit(this, null);
-    idTable.closeScope();
-
-    //exportScope(ast.D1);
-    //exportScope(ast.D2);
-
-    ast.D1.visit(this, null);
-    ast.D2.visit(this, null);
-
-    return null;
-  }
-
-  /**
-   * Add visitRecursiveDeclaration.
-   * 
-   * @param ast
-   * @param o
-   * @return 
-   */
-  public Object visitRecursiveDeclaration(RecursiveDeclaration ast, Object o) {
-    //exportScopeRecursive(ast.D);
-    ast.D.visit(this, null);
-
-    return null;
-  }
 
 
   // Array Aggregates

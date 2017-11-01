@@ -1,0 +1,25 @@
+let
+
+  var c: Integer;
+
+  recursive 
+      proc a() ~ a() end
+      and
+      proc b(c : Integer) ~ b(8) ; a() end
+!      proc a(a: Integer) ~ c:= a * 3 ; a(a) end 
+!      and
+!      proc f(a: Integer) ~ c := a * 3 ; a(a) end
+!      proc f(a: Integer) ~ a(5) end
+!      and
+!      proc r(a: Integer) ~ 
+!          !c := a * 3;
+!          !r(c);
+!          f(3)
+!      end
+  end
+
+in
+
+   putint(c)
+
+end
