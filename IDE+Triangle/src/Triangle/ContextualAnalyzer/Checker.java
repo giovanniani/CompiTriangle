@@ -565,12 +565,20 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitLocalDeclaration(LocalDeclaration ast, Object o) {
+    // Open scope to isolate the scope of declarations in D1, so that they are only seen in D2.
     idTable.openScope();
     ast.D1.visit(this, null);
+
+    // Open scope to isolate the scope of declarations in D2.
     idTable.openScope();
     ast.D2.visit(this, null);
+
+    // Close scope D1.
     idTable.closeScope();
+    // Close scope D2.
     idTable.closeScope();
+
+    // Exports declarations in D2.
     exportScope(ast.D2);
 
     return null;
@@ -584,14 +592,19 @@ public final class Checker implements Visitor {
    * @return 
    */
   public Object visitParDeclaration(ParDeclaration ast, Object o) {
+    // Open scope to isolate the scope of declarations in D1.
     idTable.openScope();
     ast.D1.visit(this, null);
     idTable.closeScope();
+    // Close scope D1.
 
+    // Open scope to isolate the scope of declarations in D2.
     idTable.openScope();
     ast.D2.visit(this, null);
     idTable.closeScope();
+    // Close scope D2.
 
+    // Visit again the trees to validate that there are no repeated declarations and exports the declarations.
     ast.D1.visit(this, null);
     ast.D2.visit(this, null);
 

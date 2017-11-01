@@ -1,10 +1,14 @@
 let
-	const c ~ 3;
-	par const v ~ 3 and var f := v+4 end;
-	par const v ~ 3 and var f := v+4 end;
-	par const v ~ 3 and var f := v+4 end
 
-	
-in 
-	skip
+	const a ~ 3;
+	par
+		const b ~ 3
+		and
+		var c := a + 3
+	end
+
+in
+
+	putint(c)
+
 end
