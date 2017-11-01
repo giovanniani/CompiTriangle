@@ -6,6 +6,8 @@ let
       proc a() ~ a() end
       and
       proc b(c : Integer) ~ b(8) ; a() end
+      and
+      func g() : Boolean ~ 2<3
   end
 
 in
