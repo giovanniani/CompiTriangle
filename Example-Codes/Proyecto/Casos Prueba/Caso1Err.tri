@@ -1,0 +1,14 @@
+! Sin "skip" en el if
+
+let
+
+  var a := 1
+
+in 
+  if a > 0 then 
+    put ('M')
+  else
+
+  end ! del if
+
+end ! del let 

@@ -1,0 +1,18 @@
+let
+
+	var dec3 := 2;	
+
+	par
+
+		var dec := 1
+		and
+		const b ~ 1
+		and
+		var dec2 := dec3
+	end
+
+in
+
+	skip
+
+end

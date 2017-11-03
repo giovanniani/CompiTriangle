@@ -1,0 +1,20 @@
+let
+
+	const a ~ 3;
+	par
+		const b ~ 3
+		and
+		var c := a + 3
+	end;
+
+	par
+		var d := b + 10
+		and
+		var e := c + 20
+	end
+
+in
+
+	putint(e)
+
+end

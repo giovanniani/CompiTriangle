@@ -1,0 +1,15 @@
+let
+	var num: Integer
+in
+
+	num := 0;
+
+	repeat do 
+		num := num + 1
+	while (num <= 5)
+	
+	end;
+		
+	putint(num)
+
+end

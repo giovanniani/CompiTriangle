@@ -1,0 +1,15 @@
+let
+
+	recursive
+
+		proc a() ~ put('Z')
+  		and
+		func m(): Integer ~ 10
+
+	end
+
+in
+
+	putint (1)
+
+end

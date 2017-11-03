@@ -1,0 +1,8 @@
+for
+
+   var a := 1 to 100 di
+
+    putint (a)
+
+end
+ 

@@ -1,0 +1,16 @@
+let
+	var a:= 3;
+	
+	recursive proc b(var s: Integer) ~ a:= 4*s end
+		and
+		  proc c(var s: Integer) ~ a:= 4 end
+	end;
+
+	recursive proc c() ~ b(3) end
+		and
+		  proc f()~ a:= 4 end
+	end
+in
+ skip
+
+end

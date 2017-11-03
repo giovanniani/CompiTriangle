@@ -1,0 +1,6 @@
+for
+	var a := 1 to 10 while a>10 do
+	putint (a);
+	a:= a+1
+end
+ 

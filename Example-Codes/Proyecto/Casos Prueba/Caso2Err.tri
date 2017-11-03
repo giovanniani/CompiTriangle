@@ -1,0 +1,16 @@
+let
+	var num: Integer
+in
+
+	num := 1;
+
+	repeat white (num < 5) do
+
+		skip;
+
+		num := num + 1
+	end;
+		
+	putint(num)
+
+end

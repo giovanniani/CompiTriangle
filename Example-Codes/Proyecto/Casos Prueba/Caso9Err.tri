@@ -1,0 +1,8 @@
+for
+
+  var a := 1 to 'M' do
+
+    putint (2)
+
+end
+

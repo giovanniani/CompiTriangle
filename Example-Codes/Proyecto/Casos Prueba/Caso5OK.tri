@@ -1,0 +1,5 @@
+let
+	var a := 2147483647
+in
+	putint(a)
+end

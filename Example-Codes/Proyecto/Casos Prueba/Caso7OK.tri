@@ -1,0 +1,21 @@
+let
+	var num: Integer
+in
+
+	num := 1;
+
+	repeat do
+
+		if (num = 2) then
+			put('O')
+		else
+			put('M')
+		end;
+
+		num := num + 1
+
+	until (num > 5)
+
+	end
+
+end

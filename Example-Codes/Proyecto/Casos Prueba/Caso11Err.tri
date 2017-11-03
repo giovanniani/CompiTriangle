@@ -1,0 +1,16 @@
+let
+
+	par
+
+		var dec := 1
+		and
+		const b ~ 1
+		and
+		var dec2 := dec
+	end
+
+in
+
+	skip
+
+end

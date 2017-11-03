@@ -1,0 +1,6 @@
+let
+	var begin := 0
+in
+	begin := begin + 1;
+		skip
+end
